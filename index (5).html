@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>14/2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Cairo', 'Amiri', serif;
+            background: linear-gradient(135deg, #ffe1ec 0%, #f6acd6 60%, #fd7da9 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Floating hearts animation */
+        .hearts-bg {
+            pointer-events: none;
+            position: fixed;
+            width: 100vw; height: 100vh;
+            top: 0; left: 0;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: .19;
+            animation: floatHearts 12s linear infinite;
+            filter: drop-shadow(0 3px 15px #d7266040);
+        }
+        @keyframes floatHearts {
+            0% { transform: translateY(100vh) scale(.6) rotate(-40deg);}
+            80% { opacity:.17;}
+            100% { transform: translateY(-120px) scale(1) rotate(40deg); opacity:0;}
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 560px;
+            margin: 6vh auto 0 auto;
+            background: rgba(255,255,255,0.97);
+            border-radius: 33px;
+            box-shadow: 0 8px 30px 5px #fb6f9211;
+            padding: 45px 24px 28px 24px;
+            overflow: hidden;
+            animation: fadeIn 1.2s 0.1s both;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity:1; transform:none; } }
+
+        .main-heading {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(90deg, #e94057 38%, #f27121 80%, #fdaecb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: #e94057;
+            font-size: 2.6em;
+            text-align: center;
+            margin-bottom: 0px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px #fdaecb33;
+            line-height: 1.1;
+        }
+        .subtitle {
+            color: #b0578d;
+            font-size: 1.18em;
+            text-align: center;
+            margin-bottom: 28px;
+            font-family: cairo;
+            letter-spacing:.5px;
+        }
+
+        /* love letter */
+        .letter-heading {
+            color: #fd1d7c;
+            font-family: 'Amiri', serif;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.18em;
+            margin-bottom: 7px;
+        }
+        .love-letter {
+            color: #a03367;
+            background: linear-gradient(110deg, #fff0f7 80%, #fdc7d0 100%);
+            border-radius: 20px;
+            border: 2.5px solid #fd1d7c14;
+            padding: 21px 12px 21px 12px;
+            font-size: 1.15em;
+            font-family: 'Cairo', Arial, sans-serif;
+            text-align: right;
+            line-height: 2.3;
+            box-shadow: 0 2px 20px #fd7ca93a;
+            margin-bottom: 42px;
+            position: relative;
+            z-index: 2;
+        }
+        .heart-emoji {
+            font-size: 1.4em;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            margin-top: 2px;
+            margin-bottom: 36px;
+        }
+        .gallery-heading {
+            text-align: center;
+            color: #e4015a;
+            font-family: 'Amiri', serif;
+            font-size: 1.13em;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .image-gallery img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 18px;
+            object-fit: cover;
+            box-shadow: 0 3px 19px #fd1d7c36;
+            border: 2.2px solid #fd1d7c1c;
+            transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow 0.18s;
+            background: #fff0f7;
+            margin-bottom: 1px;
+            cursor: pointer;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 5px 33px #fd1d7c88;
+            border-color: #fd1d7cc0;
+        }
+        /* Image preview overlay */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(253, 29, 124, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn .3s;
+        }
+        .lightbox-overlay img {
+            max-width: 97vw;
+            max-height: 85vh;
+            border-radius: 2vw;
+            box-shadow: 0 5px 54px #fd1d7c90, 0 1px 34px #fff;
+            background:#fff;
+        }
+
+        .footer {
+            text-align: center;
+            color: #f50057;
+            margin-top: 30px;
+            font-size: 1em;
+            opacity: 0.96;
+            letter-spacing: 1.5px;
+            font-family: 'Amiri', serif;
+            user-select: none;
+        }
+        /* Responsive */
+        @media (max-width:650px) {
+            .container { max-width:98vw; padding:15px 4vw 11px 4vw; }
+            .main-heading { font-size:1.28em; }
+            .love-letter { font-size:1.03em; padding: 12px 2vw;}
+            .image-gallery { grid-template-columns:1fr; gap:12px;}
+            .image-gallery img { aspect-ratio: 4/5; min-height: 150px; max-height:230px;}
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Animated Hearts Background -->
+    <div class="hearts-bg"></div>
+
+    <div class="container">
+        <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد ساعتين فيها والله</h1>
+        <p class="subtitle">اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي</p>
+
+        <section>
+            <div class="letter-heading">14/2:</div>
+            <div class="love-letter">
+                عامله ايه يا نونو،<br>
+                <span class="heart-emoji">💗</span>
+                عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب<br>
+                <span class="heart-emoji">💗💖💗</span>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="gallery-heading"> الدمج بتاعي</div>
+            <div class="image-gallery" id="gallery">
+                <!-- Replace with your own images! -->
+                <img src="Image1.jpg" alt="صورة حب">
+                <img src="Image2.jpg" alt="صورة حب">
+                <img src="Image3.jpg" alt="صورة حب">
+                <img src="Image4.jpg" alt="صورة حب">
+            </div>
+        </section>
+        <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
+    </div>
+
+    <!-- Hearts Animation JS -->
+    <script>
+    // Generate floating hearts between random positions, with varied sizes/timing!
+    function randomBetween(a, b) { return Math.random() * (b - a) + a; }
+    const heartImgs = [
+        // Free PNG hearts (no copyright): you can even add more!
+        'https://pngimg.com/uploads/heart/heart_PNG51147.png',
+        'https://pngimg.com/uploads/heart/heart_PNG51337.png',
+        'https://pngimg.com/uploads/heart/heart_PNG51254.png'
+    ];
+    function makeHeart() {
+        const d = document.createElement('img');
+        d.src = heartImgs[Math.floor(Math.random()*heartImgs.length)];
+        d.className = 'heart';
+        d.style.left = randomBetween(-4,96)+'vw';
+        d.style.width = d.style.height = randomBetween(30,55)+'px';
+        d.style.animationDelay = randomBetween(0,5)+'s';
+        d.style.animationDuration = randomBetween(9, 16)+'s';
+        d.style.opacity = randomBetween(.16,.23);
+        document.querySelector('.hearts-bg').appendChild(d);
+        setTimeout(()=>{d.remove();},16000);
+    }
+    setInterval(makeHeart, 700);
+    for(let i=0;i<9;i++) setTimeout(makeHeart, i*500);
+
+    // Simple lightbox: click image, show large, click anywhere to close
+    document.querySelectorAll('.image-gallery img').forEach(img=>{
+        img.onclick = function() {
+            const o = document.createElement('div');
+            o.className = 'lightbox-overlay';
+            o.onclick = ()=>o.remove();
+            const im = document.createElement('img');
+            im.src = img.src; im.alt = img.alt; o.appendChild(im);
+            document.body.appendChild(o);
+        };
+    });
+    </script>
+</body>
+</html>
