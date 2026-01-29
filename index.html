@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="ar">
     <title>14/2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Fonts -->
@@ -95,7 +96,7 @@
             text-align: right;
             line-height: 2.3;
             box-shadow: 0 2px 20px #fd7ca93a;
-            margin-bottom: 42px;
+            margin-bottom: 22px;
             position: relative;
             z-index: 2;
         }
@@ -169,6 +170,28 @@
             font-family: 'Amiri', serif;
             user-select: none;
         }
+        /* Audio control button */
+        .audio-toggle {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 3000;
+            background: linear-gradient(180deg,#ff5c8d,#ff2a6a);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(253,29,124,.25);
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            display: none; /* shown only if autoplay blocked */
+        }
+        .audio-toggle.small {
+            padding: 8px 10px;
+            font-size: 0.92em;
+        }
+
         /* Responsive */
         @media (max-width:650px) {
             .container { max-width:98vw; padding:15px 4vw 11px 4vw; }
@@ -176,23 +199,28 @@
             .love-letter { font-size:1.03em; padding: 12px 2vw;}
             .image-gallery { grid-template-columns:1fr; gap:12px;}
             .image-gallery img { aspect-ratio: 4/5; min-height: 150px; max-height:230px;}
+            .audio-toggle { left: 50%; transform: translateX(-50%); }
         }
     </style>
 </head>
 <body>
+    <!-- Background audio element.
+         ضع ملف الأغنية في المستودع في المسار audio/song.mp3 أو غيّر src إلى الرابط الذي سترفعينه -->
+    <audio id="bg-audio" src="Song1.mp3" preload="auto" loop playsinline></audio>
+
     <!-- Floating Animated Hearts Background -->
     <div class="hearts-bg"></div>
 
     <div class="container">
         <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد ساعتين فيها والله</h1>
-        <p class="subtitle">اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي</p>
+        <p class="subtitle">اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه كدا زياده عشان لما تروحي[...]</p>
 
         <section>
             <div class="letter-heading">14/2:</div>
-            <div class="love-letter">
+            <div class="love-letter" id="letter">
                 عامله ايه يا نونو،<br>
                 <span class="heart-emoji">💗</span>
-                عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب<br>
+                عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزع[...]
                 <span class="heart-emoji">💗💖💗</span>
             </div>
         </section>
@@ -209,6 +237,9 @@
         </section>
         <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
     </div>
+
+    <!-- Play/Stop button (shown only if autoplay is blocked) -->
+    <button id="audio-btn" class="audio-toggle small" aria-pressed="false" title="تشغيل/إيقاف الموسيقى">تشغيل الموسيقى</button>
 
     <!-- Hearts Animation JS -->
     <script>
@@ -246,6 +277,63 @@
             document.body.appendChild(o);
         };
     });
+
+    // Audio autoplay attempt + fallback button if blocked
+    (function(){
+        const audio = document.getElementById('bg-audio');
+        const btn = document.getElementById('audio-btn');
+
+        // helper to update button text/state
+        function updateButton() {
+            if (audio.paused) {
+                btn.textContent = 'تشغيل الموسيقى';
+                btn.setAttribute('aria-pressed','false');
+            } else {
+                btn.textContent = 'إيقاف الموسيقى';
+                btn.setAttribute('aria-pressed','true');
+            }
+        }
+
+        // Try to play on load
+        function tryPlay() {
+            if (!audio) return Promise.reject();
+            // set a small initial volume if you want (0.9):
+            audio.volume = 0.9;
+            return audio.play();
+        }
+
+        // If autoplay blocked, show visible play button
+        tryPlay().then(()=>{
+            // autoplay succeeded
+            btn.style.display = 'none';
+        }).catch((err)=>{
+            // autoplay blocked — show button so user can start music manually
+            btn.style.display = 'block';
+            updateButton();
+        });
+
+        // clicking the button toggles play/pause (this is a user gesture so will always work)
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play().then(updateButton).catch(()=>{/* ignore */});
+            } else {
+                audio.pause();
+                updateButton();
+            }
+        });
+
+        // also try to start audio on first user interaction anywhere (some devices allow this)
+        function onFirstInteraction() {
+            document.removeEventListener('click', onFirstInteraction);
+            document.removeEventListener('touchstart', onFirstInteraction);
+            tryPlay().then(()=>{
+                btn.style.display = 'none';
+            }).catch(()=>{ btn.style.display = 'block'; updateButton(); });
+        }
+        document.addEventListener('click', onFirstInteraction, {once:true});
+        document.addEventListener('touchstart', onFirstInteraction, {once:true});
+    })();
     </script>
 </body>
 </html>
