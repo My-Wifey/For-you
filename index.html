@@ -99,6 +99,26 @@
             margin-bottom: 22px;
             position: relative;
             z-index: 2;
+            white-space: nowrap;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        .love-letter .typing {
+            display: inline-block;
+            border-right: 2px solid #fd1d7c;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+            font-family: 'Cairo', Arial, sans-serif;
+            font-weight: 600;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            0%, 100% { border-color: transparent }
+            50% { border-color: #fd1d7c }
         }
         .heart-emoji {
             font-size: 1.4em;
@@ -191,113 +211,6 @@
             padding: 8px 10px;
             font-size: 0.92em;
         }
-        
-        /* Music player controls */
-        .music-controls {
-            position: fixed;
-            left: 18px;
-            bottom: 70px;
-            z-index: 3000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 999px;
-            padding: 8px;
-            box-shadow: 0 6px 20px rgba(253,29,124,.25);
-        }
-        
-        .music-btn {
-            background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9em;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        
-        .music-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .music-btn:active {
-            transform: scale(0.95);
-        }
-        
-        /* Countdown timer */
-        .countdown-timer {
-            position: fixed;
-            right: 18px;
-            top: 18px;
-            z-index: 3000;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 18px;
-            padding: 12px 18px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.85em;
-            color: #e4015a;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(253,29,124,.25);
-            max-width: 280px;
-            direction: rtl;
-            line-height: 1.4;
-        }
-        
-        .countdown-timer strong {
-            color: #fd1d7c;
-            font-weight: 800;
-        }
-        
-        /* Click hearts effect */
-        .click-heart {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0;
-            animation: clickHeartAnim 1.5s ease-out forwards;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        @keyframes clickHeartAnim {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(0.8);
-            }
-            50% {
-                opacity: 0.8;
-                transform: translateY(-40px) scale(1.2);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-80px) scale(0.5);
-            }
-        }
-        
-        /* Typewriter effect */
-        .typewriter-cursor {
-            display: inline-block;
-            width: 2px;
-            background-color: #fd1d7c;
-            animation: blink 1s infinite;
-            margin-right: 2px;
-            vertical-align: text-bottom;
-            height: 1.2em;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
 
         /* Responsive */
         @media (max-width:650px) {
@@ -307,19 +220,22 @@
             .image-gallery { grid-template-columns:1fr; gap:12px;}
             .image-gallery img { aspect-ratio: 4/5; min-height: 150px; max-height:230px;}
             .audio-toggle { left: 50%; transform: translateX(-50%); }
-            .music-controls { 
-                left: 50%; 
-                transform: translateX(-50%);
-                bottom: 65px;
-            }
-            .countdown-timer {
-                right: 50%;
-                transform: translateX(50%);
-                top: 10px;
-                max-width: 90%;
-                font-size: 0.75em;
-                padding: 8px 12px;
-            }
+        }
+
+        /* Hearts on click */
+        .click-heart {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+            user-select: none;
+            z-index: 4000;
+            animation: floatClickHeart 1s ease forwards;
+            filter: drop-shadow(0 0 5px #fd1d7c);
+        }
+        @keyframes floatClickHeart {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.6); }
         }
     </style>
 </head>
@@ -329,22 +245,6 @@
 
     <!-- Floating Animated Hearts Background -->
     <div class="hearts-bg"></div>
-    
-    <!-- Countdown Timer -->
-    <div class="countdown-timer" id="countdown-timer">
-        بقالي <strong id="days">0</strong> يوم و
-        <strong id="hours">0</strong> ساعة و
-        <strong id="minutes">0</strong> دقيقة و
-        <strong id="seconds">0</strong> ثانية مستحمل حلاوتك ❤️
-    </div>
-    
-    <!-- Music Controls -->
-    <div class="music-controls" id="music-controls">
-        <button class="music-btn" id="prev-btn" title="الأغنية السابقة">◀</button>
-        <button class="music-btn" id="play-pause-btn" title="تشغيل/إيقاف">▶</button>
-        <button class="music-btn" id="next-btn" title="الأغنية التالية">▶▶</button>
-        <button class="music-btn" id="random-btn" title="تشغيل عشوائي">🎲</button>
-    </div>
 
     <div class="container">
         <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله</h1>
@@ -353,7 +253,7 @@
         <section>
             <div class="letter-heading">14/2:</div>
             <div class="love-letter" id="letter">
-                عامله ايه يا نونو،<br>
+                <span class="typing"></span><br>
                 <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
                 <span class="heart-emoji">💗💖💗</span>
             </div>
@@ -362,218 +262,166 @@
         <section class="gallery-section">
             <div class="gallery-heading"> الدمج بتاعي</div>
             <div class="image-gallery" id="gallery">
-                <!-- Replace with your own images! -->
-                <img src="Image1.jpg" alt="زنجيه">
-                <img src="Image2.jpg" alt=زنجيه">
-                <img src="Image3.jpg" alt="زنجيه">
-                <img src="Image4.jpg" alt="زنجيه">
-                <img src="Image5.jpg" alt="زنجيه">
-                <img src="Image6.jpg" alt="زنجيه">
-                <img src="Image7.jpg" alt="زنجيه">
-                <img src="Image8.jpg" alt="زنجيه">
-                <img src="Image9.jpg" alt="زنجيه">
-                <img src="Image10.jpg" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=1" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=2" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=3" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=4" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=5" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=6" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=7" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=8" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=9" alt="زنجيه">
+                <img src="https://picsum.photos/400/500?random=10" alt="زنجيه">
             </div>
         </section>
+
         <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
+
+        <!-- العداد -->
+        <div id="time-count" style="font-family: 'Cairo', sans-serif; font-size: 1.2em; color: #e4015a; text-align: center; margin-top: 10px; font-weight: 600;">
+            بقالي ... مستحمل حلاوتك
+        </div>
     </div>
 
-    <!-- Play/Stop button (shown only if autoplay is blocked) -->
+    <!-- Play/Stop button -->
     <button id="audio-btn" class="audio-toggle small" aria-pressed="false" title="تشغيل/إيقاف الموسيقى">دوسي هنا</button>
 
     <script>
-    // 1. Music Player with Multiple Songs - Fixed
-    const songs = [
-        "Song1.mp3",
-        "Song2.mp3", 
-        "Song3.mp3"
+    // Floating hearts background
+    function randomBetween(a, b) { return Math.random() * (b - a) + a; }
+    const heartImgs = [
+        'https://pngimg.com/uploads/heart/heart_PNG51147.png',
+        'https://pngimg.com/uploads/heart/heart_PNG51337.png',
+        'https://pngimg.com/uploads/heart/heart_PNG51254.png'
     ];
-    
-    // استخدم روابط أغاني مؤقتة للاختبار إذا لم تكن الملفات موجودة
-    const testSongs = [
-        "https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3",
-        "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
-        "https://assets.mixkit.co/music/preview/mixkit-summer-bossa-491.mp3"
-    ];
-    
-    const audio = document.getElementById('bg-audio');
-    const musicControls = document.getElementById('music-controls');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const randomBtn = document.getElementById('random-btn');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const audioBtn = document.getElementById('audio-btn');
-    
-    let currentSongIndex = 0;
-    
-    // Function to load and play a song
-    function loadSong(index) {
-        currentSongIndex = index;
-        
-        // جرب أولاً الملفات المحلية، ثم الروابط الاختبارية
-        const localAudio = new Audio();
-        localAudio.src = songs[index];
-        
-        localAudio.addEventListener('error', () => {
-            // إذا فشل تحميل الملف المحلي، استخدم الرابط الاختباري
-            audio.src = testSongs[index];
-            console.log(`Using test song for index ${index}`);
-            playAudio();
-        });
-        
-        localAudio.addEventListener('canplaythrough', () => {
-            // إذا نجح تحميل الملف المحلي، استخدمه
-            audio.src = songs[index];
-            console.log(`Using local song for index ${index}`);
-            playAudio();
-        });
-        
-        localAudio.load();
+    function makeHeart() {
+        const d = document.createElement('img');
+        d.src = heartImgs[Math.floor(Math.random()*heartImgs.length)];
+        d.className = 'heart';
+        d.style.left = randomBetween(-4,96)+'vw';
+        d.style.width = d.style.height = randomBetween(30,55)+'px';
+        d.style.animationDelay = randomBetween(0,5)+'s';
+        d.style.animationDuration = randomBetween(9, 16)+'s';
+        d.style.opacity = randomBetween(.16,.23);
+        document.querySelector('.hearts-bg').appendChild(d);
+        setTimeout(()=>{d.remove();},16000);
     }
-    
-    function playAudio() {
-        audio.play().then(() => {
-            updatePlayPauseButton(true);
-            if (audioBtn) {
-                audioBtn.textContent = 'إيقاف الموسيقى';
-                audioBtn.setAttribute('aria-pressed', 'true');
-            }
-            console.log(`Playing song ${currentSongIndex + 1}`);
-        }).catch(error => {
-            console.log('Autoplay blocked:', error);
-            updatePlayPauseButton(false);
-        });
-    }
-    
-    // Initialize with first song
-    loadSong(0);
-    
-    // Play next song
-    function playNext() {
-        currentSongIndex = (currentSongIndex + 1) % songs.length;
-        loadSong(currentSongIndex);
-    }
-    
-    // Play previous song
-    function playPrev() {
-        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-        loadSong(currentSongIndex);
-    }
-    
-    // Play random song
-    function playRandom() {
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * songs.length);
-        } while (randomIndex === currentSongIndex && songs.length > 1);
-        
-        loadSong(randomIndex);
-    }
-    
-    // Update play/pause button text
-    function updatePlayPauseButton(isPlaying) {
-        if (isPlaying) {
-            playPauseBtn.textContent = '⏸';
-            playPauseBtn.title = 'إيقاف الموسيقى';
-        } else {
-            playPauseBtn.textContent = '▶';
-            playPauseBtn.title = 'تشغيل الموسيقى';
-        }
-    }
-    
-    // Event listeners for music controls
-    prevBtn.addEventListener('click', playPrev);
-    nextBtn.addEventListener('click', playNext);
-    randomBtn.addEventListener('click', playRandom);
-    
-    playPauseBtn.addEventListener('click', function() {
-        if (audio.paused) {
-            audio.play().then(() => {
-                updatePlayPauseButton(true);
-                if (audioBtn) {
-                    audioBtn.textContent = 'إيقاف الموسيقى';
-                    audioBtn.setAttribute('aria-pressed', 'true');
-                }
-            }).catch(error => {
-                console.log('Play failed:', error);
-                updatePlayPauseButton(false);
-            });
-        } else {
-            audio.pause();
-            updatePlayPauseButton(false);
-            if (audioBtn) {
-                audioBtn.textContent = 'دوسي هنا';
-                audioBtn.setAttribute('aria-pressed', 'false');
-            }
-        }
+    setInterval(makeHeart, 700);
+    for(let i=0;i<9;i++) setTimeout(makeHeart, i*500);
+
+    // Simple lightbox: click image to enlarge and close on click anywhere
+    document.querySelectorAll('.image-gallery img').forEach(img=>{
+        img.onclick = function() {
+            const o = document.createElement('div');
+            o.className = 'lightbox-overlay';
+            o.onclick = ()=>o.remove();
+            const im = document.createElement('img');
+            im.src = img.src; im.alt = img.alt; o.appendChild(im);
+            document.body.appendChild(o);
+        };
     });
-    
-    audio.addEventListener('ended', playNext);
-    
-    // Update audio button text based on playback state
-    audio.addEventListener('play', function() {
-        updatePlayPauseButton(true);
-        if (audioBtn) {
+
+    // Audio player with 3 songs and controls
+    const audio = document.getElementById('bg-audio');
+    const audioBtn = document.getElementById('audio-btn');
+    const songs = [
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+    ];
+    let currentSong = 0;
+
+    function loadSong(index) {
+        audio.src = songs[index];
+        audio.load();
+        audio.play();
+        updateButton();
+    }
+    function updateButton() {
+        if (audio.paused) {
+            audioBtn.textContent = 'دوسي هنا';
+            audioBtn.setAttribute('aria-pressed', 'false');
+        } else {
             audioBtn.textContent = 'إيقاف الموسيقى';
             audioBtn.setAttribute('aria-pressed', 'true');
         }
-    });
-    
-    audio.addEventListener('pause', function() {
-        updatePlayPauseButton(false);
-        if (audioBtn) {
-            audioBtn.textContent = 'دوسي هنا';
-            audioBtn.setAttribute('aria-pressed', 'false');
+    }
+    audioBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            if(!audio.src) {
+                loadSong(currentSong);
+            } else {
+                audio.play();
+                updateButton();
+            }
+        } else {
+            audio.pause();
+            updateButton();
         }
     });
-    
-    // 2. Countdown Timer - Fixed
-    const targetDate = new Date('September 7, 2025 00:00:00').getTime();
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-    
-    function updateCountdown() {
-        const now = new Date().getTime();
-        
-        // تأكد أن التاريخ الحالي بعد تاريخ الهدف
-        if (now < targetDate) {
-            // إذا كان التاريخ الحالي قبل 7 سبتمبر 2025
-            const timeRemaining = targetDate - now;
-            
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-            
-            daysEl.textContent = days;
-            hoursEl.textContent = hours;
-            minutesEl.textContent = minutes;
-            secondsEl.textContent = seconds;
-        } else {
-            // إذا كان التاريخ الحالي بعد 7 سبتمبر 2025
-            const timePassed = now - targetDate;
-            
-            const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timePassed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timePassed % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timePassed % (1000 * 60)) / 1000);
-            
-            daysEl.textContent = days;
-            hoursEl.textContent = hours;
-            minutesEl.textContent = minutes;
-            secondsEl.textContent = seconds;
+    // Next song on audio end
+    audio.addEventListener('ended', () => {
+        currentSong = (currentSong + 1) % songs.length;
+        loadSong(currentSong);
+    });
+
+    // Time counter since 7 Sep 2025 00:00:00
+    const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
+    const timeCount = document.getElementById('time-count');
+
+    function updateTimeCount() {
+        const now = new Date();
+        let diff = Math.floor((now - startDate) / 1000);
+        const days = Math.floor(diff / 86400);
+        diff %= 86400;
+        const hours = Math.floor(diff / 3600);
+        diff %= 3600;
+        const minutes = Math.floor(diff / 60);
+        const seconds = diff % 60;
+
+        timeCount.textContent = `بقالي ${days} يوم و${hours} ساعة و${minutes} دقيقة و${seconds} ثانية مستحمل حلاوتك`;
+    }
+    setInterval(updateTimeCount, 1000);
+    updateTimeCount();
+
+    // Typewriter effect for love letter first line
+    const typingText = "عامله ايه يا نونو،";
+    const typingElem = document.querySelector('.typing');
+    let charIndex = 0;
+
+    function typeWriter() {
+        if(charIndex < typingText.length) {
+            typingElem.textContent += typingText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 100);
         }
     }
-    
-    // Update countdown immediately and then every second
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    
-    // 3. Click Hearts Effect - Fixed
-    document.addEventListener('click', function(e) {
-        // Don't create hearts if clicking on interactive elements
-        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'IMG' || 
-            e.target.closest('.music-controls') || e.target.closest('.countdown-timer')) {
-        
+    typeWriter();
+
+    // Show play button if autoplay blocked
+    function tryPlayAudio() {
+        audio.volume = 0.9;
+        audio.play().then(() => {
+            audioBtn.style.display = 'none';
+        }).catch(() => {
+            audioBtn.style.display = 'block';
+            updateButton();
+        });
+    }
+    tryPlayAudio();
+
+    // Hearts on click effect
+    document.body.addEventListener('click', function(e) {
+        const heart = document.createElement('div');
+        heart.className = 'click-heart';
+        heart.style.left = e.clientX - 15 + 'px';
+heart.style.top = e.clientY - 15 + 'px';
+        heart.innerHTML = '💗';
+        document.body.appendChild(heart);
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    });
+</script>
+</body>
+</html>
