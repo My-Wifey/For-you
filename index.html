@@ -112,8 +112,8 @@
       background: linear-gradient(110deg, #fff0f7 80%, #fdc7d0 100%);
       border-radius: 20px;
       border: 2.5px solid #fd1d7c14;
-      padding: 21px 12px 21px 12px;
-      font-size: 1.15em;
+      padding: 30px 20px; /* تكبير البادينج */
+      font-size: 1.25em; /* تكبير الخط */
       font-family: "Cairo", Arial, sans-serif;
       text-align: right;
       line-height: 2.3;
@@ -121,8 +121,10 @@
       margin-bottom: 22px;
       position: relative;
       z-index: 2;
-      white-space: nowrap;
-      overflow: hidden;
+      white-space: normal; /* خلي الكلام يلتف */
+      overflow-wrap: break-word;
+      max-width: 100%;
+      box-sizing: border-box;
       border-radius: 20px;
     }
     .love-letter .typing {
@@ -217,46 +219,51 @@
     /* Audio control button */
     .audio-toggle {
       position: fixed;
+      top: 10px; /* فوق خالص */
       left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateX(-50%);
       z-index: 3000;
       background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
       color: white;
       border: none;
-      padding: 10px 14px;
+      padding: 12px 18px;
       border-radius: 999px;
       font-weight: 700;
       box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
       cursor: pointer;
       font-family: "Cairo", sans-serif;
-    }
-    .audio-toggle.small {
-      padding: 8px 10px;
-      font-size: 0.92em;
+      width: 130px;
+      max-width: 130px;
+      text-align: center;
+      white-space: nowrap;
     }
     /* Previous and Next buttons */
     #prev-btn, #next-btn {
       position: fixed;
-      top: 55%;
-      transform: translate(-50%, -50%);
+      top: 55px; /* تحت زرار الصوت */
       z-index: 3000;
       background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
       color: white;
       border: none;
-      padding: 8px 14px;
+      padding: 10px 16px;
       border-radius: 999px;
       font-weight: 700;
       box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
       cursor: pointer;
       font-family: "Cairo", sans-serif;
+      white-space: nowrap;
+      width: 90px;
+      max-width: 90px;
     }
     #prev-btn {
-      left: 30%;
+      left: 40%;
+      transform: translateX(-50%);
     }
     #next-btn {
-      left: 70%;
+      left: 60%;
+      transform: translateX(-50%);
     }
+
     /* Responsive */
     @media (max-width: 650px) {
       .container {
@@ -280,22 +287,22 @@
         max-height: 230px;
       }
       .audio-toggle {
+        top: 10px;
         left: 50%;
-        top: auto;
-        bottom: 18px;
         transform: translateX(-50%);
+        width: 120px;
       }
       #prev-btn, #next-btn {
-        top: auto;
-        bottom: 60px;
-        padding: 6px 10px;
+        top: 50px;
+        padding: 8px 12px;
         font-size: 0.85em;
+        width: 80px;
       }
       #prev-btn {
-        left: 20%;
+        left: 35%;
       }
       #next-btn {
-        left: 80%;
+        left: 65%;
       }
     }
 
@@ -485,9 +492,10 @@
     });
 
     document.getElementById("next-btn").addEventListener("click", () => {
-      currentSong = (currentSong + 1) % songs.length;
-      loadSong(currentSong);
-    });
+  currentSong = (currentSong + 1) % songs.length;
+  loadSong(currentSong);
+});
+
 
     // Time counter since 7 Sep 2025 00:00:00
     const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
@@ -549,22 +557,6 @@
         });
     }
     tryPlayAudio();
-
-    // Keep audio button vertically centered on scroll
-    window.addEventListener("scroll", () => {
-      const btn = audioBtn;
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      btn.style.top = scrollY + viewportHeight / 2 + "px";
-    });
-
-    // Initialize position on load
-    window.addEventListener("load", () => {
-      const btn = audioBtn;
-      const scrollY = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      btn.style.top = scrollY + viewportHeight / 2 + "px";
-    });
   </script>
 </body>
-            </html>
+</html>
