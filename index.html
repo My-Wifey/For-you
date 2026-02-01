@@ -121,8 +121,8 @@
         margin-bottom: 22px;
         position: relative;
         z-index: 2;
-        white-space: nowrap;
-        overflow: hidden;
+        white-space: normal; /* هنا تعديل */
+        overflow: visible;   /* هنا تعديل */
         border-radius: 20px;
       }
       .love-letter .typing {
@@ -319,12 +319,6 @@
         <div class="letter-heading">14/2:</div>
         <div class="love-letter" id="letter">
           <span class="typing"></span>
-          <br />
-          <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول
-          بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق
-          بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي
-          احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
-          <span class="heart-emoji">💗💖💗</span>
         </div>
       </section>
 
@@ -492,12 +486,3 @@
           .then(() => {
             audioBtn.style.display = "none";
           })
-          .catch(() => {
-            audioBtn.style.display = "block";
-            updateButton();
-          });
-      }
-      tryPlayAudio();
-    </script>
-  </body>
-</html>
