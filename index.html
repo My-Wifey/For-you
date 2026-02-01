@@ -219,9 +219,8 @@
     /* Audio control button */
     .audio-toggle {
       position: fixed;
-      top: 10px; /* فوق خالص */
-      left: 50%;
-      transform: translateX(-50%);
+      top: 20px;
+      right: 20px;
       z-index: 3000;
       background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
       color: white;
@@ -238,9 +237,10 @@
       white-space: nowrap;
     }
     /* Previous and Next buttons */
-    #prev-btn, #next-btn {
+    #prev-btn {
       position: fixed;
-      top: 55px; /* تحت زرار الصوت */
+      top: 70px;
+      right: 20px;
       z-index: 3000;
       background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
       color: white;
@@ -255,13 +255,23 @@
       width: 90px;
       max-width: 90px;
     }
-    #prev-btn {
-      left: 40%;
-      transform: translateX(-50%);
-    }
     #next-btn {
-      left: 60%;
-      transform: translateX(-50%);
+      position: fixed;
+      top: 120px;
+      right: 20px;
+      z-index: 3000;
+      background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
+      cursor: pointer;
+      font-family: "Cairo", sans-serif;
+      white-space: nowrap;
+      width: 90px;
+      max-width: 90px;
     }
 
     /* Responsive */
@@ -287,22 +297,23 @@
         max-height: 230px;
       }
       .audio-toggle {
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 20px;
+        right: 20px;
         width: 120px;
       }
-      #prev-btn, #next-btn {
-        top: 50px;
+      #prev-btn {
+        top: 70px;
+        right: 20px;
         padding: 8px 12px;
         font-size: 0.85em;
         width: 80px;
       }
-      #prev-btn {
-        left: 35%;
-      }
       #next-btn {
-        left: 65%;
+        top: 120px;
+        right: 20px;
+        padding: 8px 12px;
+        font-size: 0.85em;
+        width: 80px;
       }
     }
 
@@ -492,10 +503,9 @@
     });
 
     document.getElementById("next-btn").addEventListener("click", () => {
-  currentSong = (currentSong + 1) % songs.length;
-  loadSong(currentSong);
-});
-
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+    });
 
     // Time counter since 7 Sep 2025 00:00:00
     const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
