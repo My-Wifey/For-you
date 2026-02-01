@@ -42,7 +42,7 @@
             position: relative;
             z-index: 2;
             max-width: 560px;
-            margin: 6vh auto 0 auto;
+            margin: 120px auto 0 auto; /* margin-top to make space for counter */
             background: rgba(255,255,255,0.97);
             border-radius: 33px;
             box-shadow: 0 8px 30px 5px #fb6f9211;
@@ -101,7 +101,6 @@
             z-index: 2;
             white-space: nowrap;
             overflow: hidden;
-            border-radius: 20px;
         }
         .love-letter .typing {
             display: inline-block;
@@ -214,7 +213,7 @@
 
         /* Responsive */
         @media (max-width:650px) {
-            .container { max-width:98vw; padding:15px 4vw 11px 4vw; }
+            .container { max-width:98vw; padding:15px 4vw 11px 4vw; margin-top: 110px;}
             .main-heading { font-size:1.28em; }
             .love-letter { font-size:1.03em; padding: 12px 2vw;}
             .image-gallery { grid-template-columns:1fr; gap:12px;}
@@ -237,6 +236,25 @@
             0% { opacity: 1; transform: translateY(0) scale(1); }
             100% { opacity: 0; transform: translateY(-80px) scale(1.6); }
         }
+
+        /* Counter styles */
+        #time-count {
+            position: fixed;
+            top: 18px;
+            left: 0; right: 0;
+            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.3em;
+            color: #e4015a;
+            font-weight: 600;
+            z-index: 5000;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 8px 0;
+            border-radius: 20px;
+            width: fit-content;
+            margin: 0 auto;
+            box-shadow: 0 0 15px #fd1d7caa;
+        }
     </style>
 </head>
 <body>
@@ -245,6 +263,9 @@
 
     <!-- Floating Animated Hearts Background -->
     <div class="hearts-bg"></div>
+
+    <!-- Time counter on top -->
+    <div id="time-count">بقالي ... مستحمل حلاوتك و بحبك</div>
 
     <div class="container">
         <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله</h1>
@@ -262,25 +283,22 @@
         <section class="gallery-section">
             <div class="gallery-heading"> الدمج بتاعي</div>
             <div class="image-gallery" id="gallery">
-                <img src="https://picsum.photos/400/500?random=1" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=2" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=3" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=4" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=5" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=6" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=7" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=8" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=9" alt="زنجيه">
-                <img src="https://picsum.photos/400/500?random=10" alt="زنجيه">
+                <!-- استخدم صورك الخاصة هنا -->
+                <img src="Image1.jpg" alt="زنجيه">
+                <img src="Image2.jpg" alt="زنجيه">
+                <img src="Image3.jpg" alt="زنجيه">
+                <img src="Image4.jpg" alt="زنجيه">
+                <img src="Image5.jpg" alt="زنجيه">
+                <img src="Image6.jpg" alt="زنجيه">
+                <img src="Image7.jpg" alt="زنجيه">
+                <img src="Image8.jpg" alt="زنجيه">
+                <img src="Image9.jpg" alt="زنجيه">
+                <img src="Image10.jpg" alt="زنجيه">
             </div>
         </section>
 
         <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
 
-        <!-- العداد -->
-        <div id="time-count" style="font-family: 'Cairo', sans-serif; font-size: 1.2em; color: #e4015a; text-align: center; margin-top: 10px; font-weight: 600;">
-            بقالي ... مستحمل حلاوتك
-        </div>
     </div>
 
     <!-- Play/Stop button -->
@@ -321,13 +339,13 @@
         };
     });
 
-    // Audio player with 3 songs and controls
+    // Audio player with multiple songs and controls
     const audio = document.getElementById('bg-audio');
     const audioBtn = document.getElementById('audio-btn');
     const songs = [
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-        'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+        'Song1.mp3',
+        'Song2.mp3',
+        'Song3.mp3'
     ];
     let currentSong = 0;
 
@@ -366,7 +384,7 @@
     });
 
     // Time counter since 7 Sep 2025 00:00:00
-    const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
+    const startDate = new Date(2025, 8, 7, 0, 0, 0); // 8 = September (0-based)
     const timeCount = document.getElementById('time-count');
 
     function updateTimeCount() {
@@ -379,7 +397,7 @@
         const minutes = Math.floor(diff / 60);
         const seconds = diff % 60;
 
-        timeCount.textContent = `بقالي ${days} يوم و${hours} ساعة و${minutes} دقيقة و${seconds} ثانية مستحمل حلاوتك`;
+        timeCount.textContent = `بقالي ${days} يوم و${hours} ساعة و${minutes} دقيقة و${seconds} ثانية مستحمل حلاوتك و بحبك`;
     }
     setInterval(updateTimeCount, 1000);
     updateTimeCount();
@@ -415,7 +433,7 @@
         const heart = document.createElement('div');
         heart.className = 'click-heart';
         heart.style.left = e.clientX - 15 + 'px';
-heart.style.top = e.clientY - 15 + 'px';
+        heart.style.top = e.clientY - 15 + 'px';
         heart.innerHTML = '💗';
         document.body.appendChild(heart);
         setTimeout(() => {
