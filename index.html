@@ -121,7 +121,6 @@
         margin-bottom: 22px;
         position: relative;
         z-index: 2;
-        /* تعديل المربع ليكبر مع النص */
         min-height: 120px;
         max-height: none;
         overflow-wrap: break-word;
@@ -216,26 +215,28 @@
         user-select: none;
       }
       /* Audio control button */
-   .audio-toggle {
-  position: relative;
-  left: auto;
-  bottom: auto;
-  margin-top: 20px;
-  background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
-  cursor: pointer;
-  font-family: "Cairo", sans-serif;
-  z-index: 3000;
-}
-.audio-toggle.small {
-  padding: 8px 10px;
-  font-size: 0.92em;
-}
+      .audio-toggle {
+        /* غيرت من fixed لـ relative */
+        position: relative;
+        left: auto;
+        bottom: auto;
+        margin-top: 20px;
+        background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
+        cursor: pointer;
+        font-family: "Cairo", sans-serif;
+        z-index: 3000;
+        display: inline-block;
+      }
+      .audio-toggle.small {
+        padding: 8px 10px;
+        font-size: 0.92em;
+      }
       /* Responsive */
       @media (max-width: 650px) {
         .container {
@@ -258,9 +259,13 @@
           min-height: 150px;
           max-height: 230px;
         }
+        /* عدلت مكان الزرار */
         .audio-toggle {
-          left: 50%;
-          transform: translateX(-50%);
+          margin-top: 20px;
+          left: auto;
+          bottom: auto;
+          position: relative;
+          display: inline-block;
         }
       }
 
@@ -473,7 +478,7 @@
       }
       typeWriter();
 
-      // Hearts on click effect
+    // Hearts on click effect
       document.body.addEventListener("click", function (e) {
         const heart = document.createElement("div");
         heart.className = "click-heart";
@@ -494,11 +499,8 @@
             audioBtn.style.display = "none";
           })
           .catch(() => {
-            audioBtn.style.display = "block";
+            audioBtn.style.display = "inline-block";
             updateButton();
           });
       }
       tryPlayAudio();
-    </script>
-  </body>
-</html>
