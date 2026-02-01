@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Language" content="ar">
     <title>14/2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@600;800&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -16,6 +17,7 @@
             overflow-x: hidden;
             position: relative;
         }
+        /* Floating hearts animation */
         .hearts-bg {
             pointer-events: none;
             position: fixed;
@@ -50,13 +52,6 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity:1; transform:none; } }
 
-        .counter {
-            text-align:center;
-            color:#e4015a;
-            font-weight:800;
-            margin-bottom:18px;
-        }
-
         .main-heading {
             font-family: 'Amiri', serif;
             background: linear-gradient(90deg, #e94057 38%, #f27121 80%, #fdaecb 100%);
@@ -67,30 +62,115 @@
             font-size: 2.6em;
             text-align: center;
             margin-bottom: 0px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-shadow: 0 2px 12px #fdaecb33;
+            line-height: 1.1;
+        }
+        .subtitle {
+            color: #b0578d;
+            font-size: 1.18em;
+            text-align: center;
+            margin-bottom: 28px;
+            font-family: cairo;
+            letter-spacing:.5px;
         }
 
+        /* love letter */
+        .letter-heading {
+            color: #fd1d7c;
+            font-family: 'Amiri', serif;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.18em;
+            margin-bottom: 7px;
+        }
         .love-letter {
             color: #a03367;
             background: linear-gradient(110deg, #fff0f7 80%, #fdc7d0 100%);
             border-radius: 20px;
             border: 2.5px solid #fd1d7c14;
-            padding: 21px 12px;
+            padding: 21px 12px 21px 12px;
             font-size: 1.15em;
+            font-family: 'Cairo', Arial, sans-serif;
+            text-align: right;
             line-height: 2.3;
             box-shadow: 0 2px 20px #fd7ca93a;
             margin-bottom: 22px;
+            position: relative;
+            z-index: 2;
+        }
+        .heart-emoji {
+            font-size: 1.4em;
+            margin: 0 4px;
+            vertical-align: middle;
         }
 
-        .click-heart {
+        /* Gallery */
+        .gallery-section {
+            margin-top: 2px;
+            margin-bottom: 36px;
+        }
+        .gallery-heading {
+            text-align: center;
+            color: #e4015a;
+            font-family: 'Amiri', serif;
+            font-size: 1.13em;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .image-gallery img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 18px;
+            object-fit: cover;
+            box-shadow: 0 3px 19px #fd1d7c36;
+            border: 2.2px solid #fd1d7c1c;
+            transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow 0.18s;
+            background: #fff0f7;
+            margin-bottom: 1px;
+            cursor: pointer;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 5px 33px #fd1d7c88;
+            border-color: #fd1d7cc0;
+        }
+        /* Image preview overlay */
+        .lightbox-overlay {
             position: fixed;
-            pointer-events:none;
-            animation: pop 1s forwards;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(253, 29, 124, .18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn .3s;
         }
-        @keyframes pop {
-            from {transform:scale(0);opacity:1;}
-            to {transform:translateY(-80px) scale(1.5);opacity:0;}
+        .lightbox-overlay img {
+            max-width: 97vw;
+            max-height: 85vh;
+            border-radius: 2vw;
+            box-shadow: 0 5px 54px #fd1d7c90, 0 1px 34px #fff;
+            background:#fff;
         }
 
+        .footer {
+            text-align: center;
+            color: #f50057;
+            margin-top: 30px;
+            font-size: 1em;
+            opacity: 0.96;
+            letter-spacing: 1.5px;
+            font-family: 'Amiri', serif;
+            user-select: none;
+        }
+        /* Audio control button */
         .audio-toggle {
             position: fixed;
             left: 18px;
@@ -104,100 +184,396 @@
             font-weight: 700;
             box-shadow: 0 6px 20px rgba(253,29,124,.25);
             cursor: pointer;
-            display:none;
+            font-family: 'Cairo', sans-serif;
+            display: none; /* shown only if autoplay blocked */
+        }
+        .audio-toggle.small {
+            padding: 8px 10px;
+            font-size: 0.92em;
+        }
+        
+        /* Music player controls */
+        .music-controls {
+            position: fixed;
+            left: 18px;
+            bottom: 70px;
+            z-index: 3000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            padding: 8px;
+            box-shadow: 0 6px 20px rgba(253,29,124,.25);
+        }
+        
+        .music-btn {
+            background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .music-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Countdown timer */
+        .countdown-timer {
+            position: fixed;
+            right: 18px;
+            top: 18px;
+            z-index: 3000;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 18px;
+            padding: 12px 18px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85em;
+            color: #e4015a;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(253,29,124,.25);
+            max-width: 280px;
+            direction: rtl;
+            line-height: 1.4;
+        }
+        
+        .countdown-timer strong {
+            color: #fd1d7c;
+            font-weight: 800;
+        }
+        
+        /* Click hearts effect */
+        .click-heart {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: clickHeartAnim 1.5s ease-out forwards;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        @keyframes clickHeartAnim {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(-40px) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(0.5);
+            }
+        }
+        
+        /* Typewriter effect */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #fd1d7c;
+            animation: blink 1s infinite;
+            margin-right: 2px;
+            vertical-align: text-bottom;
+            height: 1.2em;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width:650px) {
+            .container { max-width:98vw; padding:15px 4vw 11px 4vw; }
+            .main-heading { font-size:1.28em; }
+            .love-letter { font-size:1.03em; padding: 12px 2vw;}
+            .image-gallery { grid-template-columns:1fr; gap:12px;}
+            .image-gallery img { aspect-ratio: 4/5; min-height: 150px; max-height:230px;}
+            .audio-toggle { left: 50%; transform: translateX(-50%); }
+            .music-controls { 
+                left: 50%; 
+                transform: translateX(-50%);
+                bottom: 65px;
+            }
+            .countdown-timer {
+                right: 50%;
+                transform: translateX(50%);
+                top: 10px;
+                max-width: 90%;
+                font-size: 0.75em;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Background audio element -->
+    <audio id="bg-audio" preload="auto" loop playsinline></audio>
 
-<audio id="bg-audio" preload="auto" playsinline></audio>
-
-<div class="hearts-bg"></div>
-
-<div class="container">
-    <div class="counter" id="counter"></div>
-
-    <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله</h1>
-
-    <div class="love-letter" id="letter">
-        عامله ايه يا نونو، عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب 💗💖💗
+    <!-- Floating Animated Hearts Background -->
+    <div class="hearts-bg"></div>
+    
+    <!-- Countdown Timer -->
+    <div class="countdown-timer" id="countdown-timer">
+        بقالي <strong id="days">0</strong> يوم و
+        <strong id="hours">0</strong> ساعة و
+        <strong id="minutes">0</strong> دقيقة و
+        <strong id="seconds">0</strong> ثانية مستحمل حلاوتك ❤️
     </div>
-</div>
+    
+    <!-- Music Controls -->
+    <div class="music-controls" id="music-controls">
+        <button class="music-btn" id="prev-btn" title="الأغنية السابقة">◀</button>
+        <button class="music-btn" id="play-pause-btn" title="تشغيل/إيقاف">▶</button>
+        <button class="music-btn" id="next-btn" title="الأغنية التالية">▶▶</button>
+        <button class="music-btn" id="random-btn" title="تشغيل عشوائي">🎲</button>
+    </div>
 
-<button id="audio-btn" class="audio-toggle">تشغيل الموسيقى</button>
-<button id="next-btn" class="audio-toggle" style="bottom:70px;">Next Song</button>
-<button id="random-btn" class="audio-toggle" style="bottom:120px;">Random Song</button>
+    <div class="container">
+        <h1 class="main-heading">شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله</h1>
+        <p class="subtitle">اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي</p>
 
-<script>
-// ===== COUNTER =====
-const startDate = new Date("2025-09-07");
-function updateCounter(){
-    const now = new Date();
-    const diff = now - startDate;
+        <section>
+            <div class="letter-heading">14/2:</div>
+            <div class="love-letter" id="letter">
+                عامله ايه يا نونو،<br>
+                <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
+                <span class="heart-emoji">💗💖💗</span>
+            </div>
+        </section>
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        <section class="gallery-section">
+            <div class="gallery-heading"> الدمج بتاعي</div>
+            <div class="image-gallery" id="gallery">
+                <!-- Replace with your own images! -->
+                <img src="Image1.jpg" alt="زنجيه">
+                <img src="Image2.jpg" alt=زنجيه">
+                <img src="Image3.jpg" alt="زنجيه">
+                <img src="Image4.jpg" alt="زنجيه">
+                <img src="Image5.jpg" alt="زنجيه">
+                <img src="Image6.jpg" alt="زنجيه">
+                <img src="Image7.jpg" alt="زنجيه">
+                <img src="Image8.jpg" alt="زنجيه">
+                <img src="Image9.jpg" alt="زنجيه">
+                <img src="Image10.jpg" alt="زنجيه">
+            </div>
+        </section>
+        <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
+    </div>
 
-    document.getElementById("counter").innerText =
-        `بقالي ${days} يوم و ${hours} ساعة و ${minutes} دقيقة مستحمل حلاوتك ❤️`;
-}
-setInterval(updateCounter,1000);
-updateCounter();
+    <!-- Play/Stop button (shown only if autoplay is blocked) -->
+    <button id="audio-btn" class="audio-toggle small" aria-pressed="false" title="تشغيل/إيقاف الموسيقى">دوسي هنا</button>
 
-// ===== TYPEWRITER =====
-const letter = document.getElementById("letter");
-const text = letter.innerHTML;
-letter.innerHTML = "";
-let i=0;
-function type(){
-    if(i<text.length){
-        letter.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type,30);
+    <script>
+    // 1. Music Player with Multiple Songs - Fixed
+    const songs = [
+        "Song1.mp3",
+        "Song2.mp3", 
+        "Song3.mp3"
+    ];
+    
+    // استخدم روابط أغاني مؤقتة للاختبار إذا لم تكن الملفات موجودة
+    const testSongs = [
+        "https://assets.mixkit.co/music/preview/mixkit-driving-ambition-32.mp3",
+        "https://assets.mixkit.co/music/preview/mixkit-tech-house-vibes-130.mp3",
+        "https://assets.mixkit.co/music/preview/mixkit-summer-bossa-491.mp3"
+    ];
+    
+    const audio = document.getElementById('bg-audio');
+    const musicControls = document.getElementById('music-controls');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const randomBtn = document.getElementById('random-btn');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const audioBtn = document.getElementById('audio-btn');
+    
+    let currentSongIndex = 0;
+    
+    // Function to load and play a song
+    function loadSong(index) {
+        currentSongIndex = index;
+        
+        // جرب أولاً الملفات المحلية، ثم الروابط الاختبارية
+        const localAudio = new Audio();
+        localAudio.src = songs[index];
+        
+        localAudio.addEventListener('error', () => {
+            // إذا فشل تحميل الملف المحلي، استخدم الرابط الاختباري
+            audio.src = testSongs[index];
+            console.log(`Using test song for index ${index}`);
+            playAudio();
+        });
+        
+        localAudio.addEventListener('canplaythrough', () => {
+            // إذا نجح تحميل الملف المحلي، استخدمه
+            audio.src = songs[index];
+            console.log(`Using local song for index ${index}`);
+            playAudio();
+        });
+        
+        localAudio.load();
     }
-}
-type();
-
-// ===== CLICK HEARTS =====
-document.addEventListener("click", e=>{
-    const h=document.createElement("div");
-    h.className="click-heart";
-    h.innerText="❤️";
-    h.style.left=e.clientX+"px";
-    h.style.top=e.clientY+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1000);
-});
-
-// ===== PLAYLIST =====
-const playlist=["Song1.mp3","Song2.mp3","Song3.mp3"];
-let currentTrack=0;
-const audio=document.getElementById("bg-audio");
-audio.src=playlist[currentTrack];
-
-audio.addEventListener("ended",()=>{
-currentTrack=(currentTrack+1)%playlist.length;
-audio.src=playlist[currentTrack];
-audio.play();
-});
-
-document.getElementById("next-btn").onclick=()=>{
-currentTrack=(currentTrack+1)%playlist.length;
-audio.src=playlist[currentTrack];
-audio.play();
-};
-
-document.getElementById("random-btn").onclick=()=>{
-currentTrack=Math.floor(Math.random()*playlist.length);
-audio.src=playlist[currentTrack];
-audio.play();
-};
-
-const btn=document.getElementById("audio-btn");
-audio.play().then(()=>{}).catch(()=>btn.style.display="block");
-btn.onclick=()=>{audio.paused?audio.play():audio.pause()};
-</script>
-
-</body>
-</html>
+    
+    function playAudio() {
+        audio.play().then(() => {
+            updatePlayPauseButton(true);
+            if (audioBtn) {
+                audioBtn.textContent = 'إيقاف الموسيقى';
+                audioBtn.setAttribute('aria-pressed', 'true');
+            }
+            console.log(`Playing song ${currentSongIndex + 1}`);
+        }).catch(error => {
+            console.log('Autoplay blocked:', error);
+            updatePlayPauseButton(false);
+        });
+    }
+    
+    // Initialize with first song
+    loadSong(0);
+    
+    // Play next song
+    function playNext() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+    }
+    
+    // Play previous song
+    function playPrev() {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        loadSong(currentSongIndex);
+    }
+    
+    // Play random song
+    function playRandom() {
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * songs.length);
+        } while (randomIndex === currentSongIndex && songs.length > 1);
+        
+        loadSong(randomIndex);
+    }
+    
+    // Update play/pause button text
+    function updatePlayPauseButton(isPlaying) {
+        if (isPlaying) {
+            playPauseBtn.textContent = '⏸';
+            playPauseBtn.title = 'إيقاف الموسيقى';
+        } else {
+            playPauseBtn.textContent = '▶';
+            playPauseBtn.title = 'تشغيل الموسيقى';
+        }
+    }
+    
+    // Event listeners for music controls
+    prevBtn.addEventListener('click', playPrev);
+    nextBtn.addEventListener('click', playNext);
+    randomBtn.addEventListener('click', playRandom);
+    
+    playPauseBtn.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play().then(() => {
+                updatePlayPauseButton(true);
+                if (audioBtn) {
+                    audioBtn.textContent = 'إيقاف الموسيقى';
+                    audioBtn.setAttribute('aria-pressed', 'true');
+                }
+            }).catch(error => {
+                console.log('Play failed:', error);
+                updatePlayPauseButton(false);
+            });
+        } else {
+            audio.pause();
+            updatePlayPauseButton(false);
+            if (audioBtn) {
+                audioBtn.textContent = 'دوسي هنا';
+                audioBtn.setAttribute('aria-pressed', 'false');
+            }
+        }
+    });
+    
+    audio.addEventListener('ended', playNext);
+    
+    // Update audio button text based on playback state
+    audio.addEventListener('play', function() {
+        updatePlayPauseButton(true);
+        if (audioBtn) {
+            audioBtn.textContent = 'إيقاف الموسيقى';
+            audioBtn.setAttribute('aria-pressed', 'true');
+        }
+    });
+    
+    audio.addEventListener('pause', function() {
+        updatePlayPauseButton(false);
+        if (audioBtn) {
+            audioBtn.textContent = 'دوسي هنا';
+            audioBtn.setAttribute('aria-pressed', 'false');
+        }
+    });
+    
+    // 2. Countdown Timer - Fixed
+    const targetDate = new Date('September 7, 2025 00:00:00').getTime();
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        
+        // تأكد أن التاريخ الحالي بعد تاريخ الهدف
+        if (now < targetDate) {
+            // إذا كان التاريخ الحالي قبل 7 سبتمبر 2025
+            const timeRemaining = targetDate - now;
+            
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+        } else {
+            // إذا كان التاريخ الحالي بعد 7 سبتمبر 2025
+            const timePassed = now - targetDate;
+            
+            const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timePassed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timePassed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timePassed % (1000 * 60)) / 1000);
+            
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+        }
+    }
+    
+    // Update countdown immediately and then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // 3. Click Hearts Effect - Fixed
+    document.addEventListener('click', function(e) {
+        // Don't create hearts if clicking on interactive elements
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'IMG' || 
+            e.target.closest('.music-controls') || e.target.closest('.countdown-timer')) {
+        
