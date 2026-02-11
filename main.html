@@ -313,7 +313,7 @@
   }
 }
 
-/* Counter styles */
+/* Counter styles UPDATED */
 #time-count {
   font-family: "Cairo", sans-serif;
   font-size: 1.4em;
@@ -321,6 +321,21 @@
   text-align: center;
   margin-bottom: 25px;
   font-weight: 600;
+  background: linear-gradient(135deg, rgba(253, 29, 124, 0.08) 0%, rgba(253, 174, 203, 0.06) 100%);
+  padding: 20px 15px;
+  border-radius: 18px;
+  border: 2px solid rgba(253, 29, 124, 0.15);
+  letter-spacing: 1px;
+  line-height: 1.8;
+  box-shadow: 0 4px 15px rgba(253, 29, 124, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+#time-count:hover {
+  background: linear-gradient(135deg, rgba(253, 29, 124, 0.12) 0%, rgba(253, 174, 203, 0.1) 100%);
+  box-shadow: 0 6px 20px rgba(253, 29, 124, 0.15);
+  transform: translateY(-2px);
 }
 
   </style>
@@ -475,24 +490,43 @@
       loadSong(currentSong);
     });
 
-    // Time counter since 7 Sep 2025 00:00:00
-    const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
-    const timeCount = document.getElementById("time-count");
+    // Time counter MONTHS / DAYS / HOURS / MINUTES
+const startDate = new Date(2025, 8, 7, 0, 0, 0);
+const timeCount = document.getElementById("time-count");
 
-    function updateTimeCount() {
-      const now = new Date();
-      let diff = Math.floor((now - startDate) / 1000);
-      const days = Math.floor(diff / 86400);
-      diff %= 86400;
-      const hours = Math.floor(diff / 3600);
-      diff %= 3600;
-      const minutes = Math.floor(diff / 60);
-      const seconds = diff % 60;
+function updateTimeCount() {
+  const now = new Date();
 
-      timeCount.textContent = `بقالي ${days} يوم و${hours} ساعة و${minutes} دقيقة و${seconds} ثانية مستحمل حلاوتك وبحبك`;
-    }
-    setInterval(updateTimeCount, 1000);
-    updateTimeCount();
+  let months =
+    (now.getFullYear() - startDate.getFullYear()) * 12 +
+    (now.getMonth() - startDate.getMonth());
+
+  let tempDate = new Date(startDate);
+  tempDate.setMonth(startDate.getMonth() + months);
+
+  if (tempDate > now) {
+    months--;
+    tempDate.setMonth(startDate.getMonth() + months);
+  }
+
+  let diff = Math.floor((now - tempDate) / 1000);
+
+  const days = Math.floor(diff / 86400);
+  diff %= 86400;
+
+  const hours = Math.floor(diff / 3600);
+  diff %= 3600;
+
+  const minutes = Math.floor(diff / 60);
+
+  const formatNumber = (num) => String(num).padStart(2, "0");
+
+  timeCount.textContent =
+    `⏰ بقالي ${months} شهر و${days} يوم و${formatNumber(hours)} ساعة و${formatNumber(minutes)} دقيقة مستحمل حلاوتك وبحبك 💗`;
+}
+
+setInterval(updateTimeCount, 60000);
+updateTimeCount();
 
     // Typewriter effect for love letter full text
     const typingText =
@@ -538,4 +572,3 @@
   </script>
 </body>
 </html>
-```
