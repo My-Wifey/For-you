@@ -522,7 +522,7 @@ function updateTimeCount() {
   const formatNumber = (num) => String(num).padStart(2, "0");
 
   timeCount.textContent =
-    `⏰ بقالي ${months} شهر و${days} يوم و${formatNumber(hours)} ساعة و${formatNumber(minutes)} دقيقة مستحمل حلاوتك وبحبك 💗`;
+    `⏰ بقالي ${months} شهور و${days} ايام و${formatNumber(hours)} ساعة و${formatNumber(minutes)} دقيقة مستحمل حلاوتك وبحبك 💗`;
 }
 
 setInterval(updateTimeCount, 60000);
