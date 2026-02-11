@@ -1,59 +1,541 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Romantic Login Page</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f8f9fa;
-            font-family: 'Arial', sans-serif;
-        }
-        .login-container {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            color: #e63946;
-        }
-        .counter {
-            font-size: 1.5rem;
-            color: #333;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .count {
-            color: #f1faee;
-            background-color: #e63946;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Language" content="ar" />
+  <title>14/2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@600;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: "Cairo", "Amiri", serif;
+      background: linear-gradient(135deg, #ffe1ec 0%, #f6acd6 60%, #fd7da9 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Floating hearts animation */
+    .hearts-bg {
+      pointer-events: none;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .heart {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      opacity: 0.19;
+      animation: floatHearts 12s linear infinite;
+      filter: drop-shadow(0 3px 15px #d7266040);
+    }
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(100vh) scale(0.6) rotate(-40deg);
+      }
+      80% {
+        opacity: 0.17;
+      }
+      100% {
+        transform: translateY(-120px) scale(1) rotate(40deg);
+        opacity: 0;
+      }
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      margin: 6vh auto 0 auto;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 33px;
+      box-shadow: 0 8px 30px 5px #fb6f9211;
+      padding: 45px 24px 28px 24px;
+      overflow: hidden;
+      animation: fadeIn 1.2s 0.1s both;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }  .main-heading {
+  font-family: "Amiri", serif;
+  background: linear-gradient(90deg, #e94057 38%, #f27121 80%, #fdaecb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #e94057;
+  font-size: 2.6em;
+  text-align: center;
+  margin-bottom: 0px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 2px 12px #fdaecb33;
+  line-height: 1.1;
+}
+.subtitle {
+  color: #b0578d;
+  font-size: 1.18em;
+  text-align: center;
+  margin-bottom: 28px;
+  font-family: cairo;
+  letter-spacing: 0.5px;
+}
+
+/* love letter */
+.letter-heading {
+  color: #fd1d7c;
+  font-family: "Amiri", serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.18em;
+  margin-bottom: 7px;
+}
+.love-letter {
+  color: #a03367;
+  background: linear-gradient(110deg, #fff0f7 80%, #fdc7d0 100%);
+  border-radius: 20px;
+  border: 2.5px solid #fd1d7c14;
+  padding: 30px 20px; /* تكبير البادينج */
+  font-size: 1.25em; /* تكبير الخط */
+  font-family: "Cairo", Arial, sans-serif;
+  text-align: right;
+  line-height: 2.3;
+  box-shadow: 0 2px 20px #fd7ca93a;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 2;
+  white-space: normal; /* خلي الكلام يلتف */
+  overflow-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+.love-letter .typing {
+  display: inline-block;
+  border-right: 2px solid #fd1d7c;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink-caret 0.75s step-end infinite;
+  font-family: "Cairo", Arial, sans-serif;
+  font-weight: 600;
+}
+@keyframes blink-caret {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #fd1d7c;
+  }
+}
+.heart-emoji {
+  font-size: 1.4em;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* Gallery */
+.gallery-section {
+  margin-top: 2px;
+  margin-bottom: 36px;
+}
+.gallery-heading {
+  text-align: center;
+  color: #e4015a;
+  font-family: "Amiri", serif;
+  font-size: 1.13em;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.image-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 3px 19px #fd1d7c36;
+  border: 2.2px solid #fd1d7c1c;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.18s;
+  background: #fff0f7;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+.image-gallery img:hover {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 5px 33px #fd1d7c88;
+  border-color: #fd1d7cc0;
+}
+/* Image preview overlay */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(253, 29, 124, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+.lightbox-overlay img {
+  max-width: 97vw;
+  max-height: 85vh;
+  border-radius: 2vw;
+  box-shadow: 0 5px 54px #fd1d7c90, 0 1px 34px #fff;
+  background: #fff;
+}
+
+.footer {
+  text-align: center;
+  color: #f50057;
+  margin-top: 30px;
+  font-size: 1em;
+  opacity: 0.96;
+  letter-spacing: 1.5px;
+  font-family: "Amiri", serif;
+  user-select: none;
+}
+
+/* Controls: made part of content inside .container (minimal change) */
+.controls-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px auto 8px auto;
+  z-index: 3000;
+  pointer-events: auto;
+}
+
+/* Shared small button style to replace fixed-position rules only */
+.control-btn {
+  background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
+  cursor: pointer;
+  font-family: "Cairo", sans-serif;
+  white-space: nowrap;
+}
+
+/* keep the original audio-toggle visual but not fixed */
+.audio-toggle {
+  /* removed fixed positioning so it moves with page as part of content */
+  display: inline-block;
+  padding: 12px 18px;
+  min-width: 120px;
+}
+
+/* prev/next as normal inline buttons (not fixed) */
+#prev-btn, #next-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  min-width: 90px;
+}
+
+/* Responsive */
+@media (max-width: 650px) {
+  .container {
+    max-width: 98vw;
+    padding: 15px 4vw 11px 4vw;
+  }
+  .main-heading {
+    font-size: 1.28em;
+  }
+  .love-letter {
+    font-size: 1.03em;
+    padding: 12px 2vw;
+  }
+  .image-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .image-gallery img {
+    aspect-ratio: 4 / 5;
+    min-height: 150px;
+    max-height: 230px;
+  }
+  .audio-toggle {
+    min-width: 100px;
+  }
+  #prev-btn {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    min-width: 80px;
+  }
+  #next-btn {
+    padding: 8px 12px;
+    font-size: 0.85em;
+    min-width: 80px;
+  }
+}
+
+/* Hearts on click */
+.click-heart {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4000;
+  animation: floatClickHeart 1s ease forwards;
+  filter: drop-shadow(0 0 5px #fd1d7c);
+}
+@keyframes floatClickHeart {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(1.6);
+  }
+}
+
+/* Counter styles */
+#time-count {
+  font-family: "Cairo", sans-serif;
+  font-size: 1.4em;
+  color: #e4015a;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+  </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Welcome, Eyadlovemagda!</h1>
-        <p>Please login to your account:</p>
-        <form>
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <div class="counter">Days Since 7/9/2025: <span class="count">183</span></div>
-    </div>
-    <script>
-        const startDate = new Date('2025-09-07'); // Date to count days from
-        const currentDate = new Date();
-        const timeDifference = currentDate - startDate;
-        const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
-        document.querySelector('.count').textContent = daysDifference;
-    </script>
+  <!-- Background audio element -->
+  <audio id="bg-audio" preload="auto" loop playsinline></audio>
+
+  <!-- Floating Animated Hearts Background -->
+  <div class="hearts-bg"></div>
+
+  <div class="container">
+    <!-- العداد فوق -->
+    <div id="time-count">بقالي ... مستحمل حلاوتك وبحبك</div>
+    <h1 class="main-heading">
+  شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله
+</h1>
+<p class="subtitle">
+  اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه
+  كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي
+</p>
+
+<section>
+  <div class="letter-heading">14/2:</div>
+  <div class="love-letter" id="letter">
+    <span class="typing"></span>
+    <br />
+    <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول
+    بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق
+    بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي
+    احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
+    <span class="heart-emoji">💗💖💗</span>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <div class="gallery-heading"> الدمج بتاعي</div>
+  <div class="image-gallery" id="gallery">
+    <img src="Image1.jpg" alt="زنجيه" />
+    <img src="Image2.jpg" alt="زنجيه" />
+    <img src="Image3.jpg" alt="زنجيه" />
+    <img src="Image4.jpg" alt="زنجيه" />
+    <img src="Image5.jpg" alt="زنجيه" />
+    <img src="Image6.jpg" alt="زنجيه" />
+    <img src="Image7.jpg" alt="زنجيه" />
+    <img src="Image8.jpg" alt="زنجيه" />
+    <img src="Image9.jpg" alt="زنجيه" />
+    <img src="Image10.jpg" alt="زنجيه" />
+  </div>
+</section>
+
+<!-- Controls moved inside .container so they are always part of the content and move with the page -->
+<div class="controls-bottom" id="controls-bottom" role="region" aria-label="عناصر التحكم">
+  <button id="prev-btn" class="control-btn">السابق</button>
+  <button id="audio-btn" class="audio-toggle control-btn" aria-pressed="false" title="تشغيل/إيقاف الموسيقى">دوسي هنا</button>
+  <button id="next-btn" class="control-btn">التالي</button>
+</div>
+
+<div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
+
+  </div>
+
+  <script>
+    // Floating hearts background
+    function randomBetween(a, b) {
+      return Math.random() * (b - a) + a;
+    }
+    const heartImgs = [
+      "https://pngimg.com/uploads/heart/heart_PNG51147.png",
+      "https://pngimg.com/uploads/heart/heart_PNG51337.png",
+      "https://pngimg.com/uploads/heart/heart_PNG51254.png",
+    ];
+    function makeHeart() {
+      const d = document.createElement("img");
+      d.src = heartImgs[Math.floor(Math.random() * heartImgs.length)];
+      d.className = "heart";
+      d.style.left = randomBetween(-4, 96) + "vw";
+      d.style.width = d.style.height = randomBetween(30, 55) + "px";
+      d.style.animationDelay = randomBetween(0, 5) + "s";
+      d.style.animationDuration = randomBetween(9, 16) + "s";
+      d.style.opacity = randomBetween(0.16, 0.23);
+      document.querySelector(".hearts-bg").appendChild(d);
+      setTimeout(() => {
+        d.remove();
+      }, 16000);
+    }
+    setInterval(makeHeart, 700);
+    for (let i = 0; i < 9; i++) setTimeout(makeHeart, i * 500);
+
+    // Simple lightbox: click image to enlarge and close on click anywhere
+    document.querySelectorAll(".image-gallery img").forEach((img) => {
+      img.onclick = function () {
+        const o = document.createElement("div");
+        o.className = "lightbox-overlay";
+        o.onclick = () => o.remove();
+        const im = document.createElement("img");
+        im.src = img.src;
+        im.alt = img.alt;
+        o.appendChild(im);
+        document.body.appendChild(o);
+      };
+    });
+
+    // Audio player with 3 songs and controls
+    const audio = document.getElementById("bg-audio");
+    const audioBtn = document.getElementById("audio-btn");
+    const songs = ["Song1.mp3", "Song2.mp3", "Song3.mp3", "Song4.mp3", "Song5.mp3", "Song6.mp3"];
+    let currentSong = 0;
+
+    function loadSong(index) {
+      audio.src = songs[index];
+      audio.load();
+      audio.play();
+      updateButton();
+    }
+    function updateButton() {
+      if (audio.paused) {
+        audioBtn.textContent = "دوسي هنا";
+        audioBtn.setAttribute("aria-pressed", "false");
+      } else {
+        audioBtn.textContent = "إيقاف الموسيقى";
+        audioBtn.setAttribute("aria-pressed", "true");
+      }
+    }
+    audioBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        if (!audio.src) {
+          loadSong(currentSong);
+        } else {
+          audio.play();
+          updateButton();
+        }
+      } else {
+        audio.pause();
+        updateButton();
+      }
+    });
+    // Next song on audio end
+    audio.addEventListener("ended", () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+    });
+
+    // Prev and Next buttons
+    document.getElementById("prev-btn").addEventListener("click", () => {
+      currentSong = (currentSong - 1 + songs.length) % songs.length;
+      loadSong(currentSong);
+    });
+
+    document.getElementById("next-btn").addEventListener("click", () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+    });
+
+    // Time counter since 7 Sep 2025 00:00:00
+    const startDate = new Date(2025, 8, 7, 0, 0, 0); // Months 0-based, 8 = September
+    const timeCount = document.getElementById("time-count");
+
+    function updateTimeCount() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
+      const days = Math.floor(diff / 86400);
+      diff %= 86400;
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      timeCount.textContent = `بقالي ${days} يوم و${hours} ساعة و${minutes} دقيقة و${seconds} ثانية مستحمل حلاوتك وبحبك`;
+    }
+    setInterval(updateTimeCount, 1000);
+    updateTimeCount();
+
+    // Typewriter effect for love letter full text
+    const typingText =
+      "عامله ايه يا نونو، 💗 ";
+    const typingElem = document.querySelector(".typing");
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < typingText.length) {
+        typingElem.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 70);
+      }
+    }
+    typeWriter();
+
+    // Hearts on click effect (original behavior: create heart on every click)
+    document.body.addEventListener("click", function (e) {
+      const heart = document.createElement("div");
+      heart.className = "click-heart";
+      heart.style.left = e.clientX - 15 + "px";
+      heart.style.top = e.clientY - 15 + "px";
+      heart.innerHTML = "💗";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    });
+
+    // Try to autoplay audio (hide button if success)
+    function tryPlayAudio() {
+      audio.volume = 0.9;
+      audio.play()
+        .then(() => {
+          audioBtn.style.display = "none";
+        })
+        .catch(() => {
+          audioBtn.style.display = "block";
+          updateButton();
+        });
+    }
+    tryPlayAudio();
+  </script>
 </body>
 </html>
+```
