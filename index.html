@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>صفحة تسجيل الدخول</title>
     <style>
         body {
             background: linear-gradient(135deg, #ff66a3, #ffcccb);
@@ -57,11 +57,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>عشان تفتحي لازم تجاوبي علي سؤالين الاول </h1>
+        <h1>❤️ مرحباً بك ❤️</h1>
         <form id="loginForm">
             <div class="form-group">
-                <label for="answer1">أكثر دلع بقولهولك إيه؟</label>
-                <input type="text" id="answer1" placeholder="نونو" required>
+                <label for="answer1">أكثر دلع بقول لك إيه؟</label>
+                <input type="text" id="answer1" required>
             </div>
             <div class="form-group">
                 <label for="answer2">تاريخ أول مرة اتكلمنا؟</label>
@@ -79,75 +79,11 @@
             const answer2 = document.getElementById('answer2').value.trim();
             
             if(answer1 === 'نونو' && answer2 === '7/9/2025') {
-                window.location.href = 'index.html';
+                window.location.href = 'main.html';
             } else {
                 alert('الإجابات غير صحيحة! حاول تاني 💔');
                 document.getElementById('answer1').value = '';
                 document.getElementById('answer2').value = '';
-            }
-        });
-    </script>
-</body>
-</html>            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #fd1d7c;
-            box-sizing: border-box;
-            font-size: 1em;
-            font-family: "Cairo", sans-serif;
-            text-align: right;
-        }
-        input[type='text']::placeholder {
-            color: #b0578d;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
-            border: none;
-            border-radius: 999px;
-            color: white;
-            font-size: 1em;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
-            font-family: "Cairo", sans-serif;
-        }
-        button:hover {
-            opacity: 0.9;
-        }
-        .error-message {
-            color: #e94057;
-            text-align: center;
-            display: none;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h2>💗 أهلاً 💗</h2>
-        <div class="error-message" id="error-message">البيانات غير صحيحة!</div>
-        <form id="login-form">
-            <div class="form-group">
-                <input type="text" placeholder="اكتر دلع بقولهولك" id="name" required>
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="تاريخ أول مرة اتكلمنا" id="date" required>
-            </div>
-            <button type="submit">دخول 💕</button>
-        </form>
-    </div>
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const nameValue = document.getElementById('name').value;
-            const dateValue = document.getElementById('date').value;
-            if (nameValue === 'نونو' && dateValue === '7/9/2025') {
-                window.location.href = 'index.html';
-            } else {
-                document.getElementById('error-message').style.display = 'block';
             }
         });
     </script>
