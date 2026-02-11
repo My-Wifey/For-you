@@ -3,38 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>Login</title>
     <style>
         body {
-            direction: rtl;
-            background: linear-gradient(135deg, #ffe1ec 0%, #f6acd6 60%, #fd7da9 100%);
-            font-family: "Cairo", "Amiri", serif;
+            background: linear-gradient(135deg, #ff66a3, #ffcccb);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-        .login-container {
-            background-color: rgba(255, 255, 255, 0.97);
-            padding: 45px 30px;
-            border-radius: 33px;
-            box-shadow: 0 8px 30px 5px rgba(251, 111, 146, 0.07);
-            max-width: 400px;
-            width: 90%;
-        }
-        h2 {
+            height: 100vh;
+            color: white;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            color: #e94057;
-            font-size: 2em;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2rem;
             margin-bottom: 30px;
         }
         .form-group {
             margin-bottom: 20px;
         }
-        input[type='text'] {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
             width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff1744;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>عشان تفتحي لازم تجاوبي علي سؤالين الاول </h1>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="answer1">أكثر دلع بقولهولك إيه؟</label>
+                <input type="text" id="answer1" placeholder="نونو" required>
+            </div>
+            <div class="form-group">
+                <label for="answer2">تاريخ أول مرة اتكلمنا؟</label>
+                <input type="text" id="answer2" placeholder="7/9/2025" required>
+            </div>
+            <button type="submit">دخول 💕</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const answer1 = document.getElementById('answer1').value.trim();
+            const answer2 = document.getElementById('answer2').value.trim();
+            
+            if(answer1 === 'نونو' && answer2 === '7/9/2025') {
+                window.location.href = 'index.html';
+            } else {
+                alert('الإجابات غير صحيحة! حاول تاني 💔');
+                document.getElementById('answer1').value = '';
+                document.getElementById('answer2').value = '';
+            }
+        });
+    </script>
+</body>
+</html>            width: 100%;
             padding: 12px;
             border-radius: 10px;
             border: 2px solid #fd1d7c;
