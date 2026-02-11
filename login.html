@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <style>
+        body {
+            direction: rtl;
+            background: linear-gradient(135deg, #ffe1ec 0%, #f6acd6 60%, #fd7da9 100%);
+            font-family: "Cairo", "Amiri", serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.97);
+            padding: 45px 30px;
+            border-radius: 33px;
+            box-shadow: 0 8px 30px 5px rgba(251, 111, 146, 0.07);
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 {
+            text-align: center;
+            color: #e94057;
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type='text'] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #fd1d7c;
+            box-sizing: border-box;
+            font-size: 1em;
+            font-family: "Cairo", sans-serif;
+            text-align: right;
+        }
+        input[type='text']::placeholder {
+            color: #b0578d;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
+            border: none;
+            border-radius: 999px;
+            color: white;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
+            font-family: "Cairo", sans-serif;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .error-message {
+            color: #e94057;
+            text-align: center;
+            display: none;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>💗 أهلاً 💗</h2>
+        <div class="error-message" id="error-message">البيانات غير صحيحة!</div>
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" placeholder="اكتر دلع بقولهولك" id="name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="تاريخ أول مرة اتكلمنا" id="date" required>
+            </div>
+            <button type="submit">دخول 💕</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nameValue = document.getElementById('name').value;
+            const dateValue = document.getElementById('date').value;
+            if (nameValue === 'نونو' && dateValue === '7/9/2025') {
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
