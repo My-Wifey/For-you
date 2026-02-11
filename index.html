@@ -3,29 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication System</title>
+    <title>Romantic Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #e63946;
+        }
+        .counter {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .count {
+            color: #f1faee;
+            background-color: #e63946;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form onsubmit="return validateForm()">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" required><br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="login-container">
+        <h1>Welcome, Eyadlovemagda!</h1>
+        <p>Please login to your account:</p>
+        <form>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="counter">Days Since 7/9/2025: <span class="count">183</span></div>
+    </div>
     <script>
-        function validateForm() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            if (username === 'نونو' && password === '[7/9/2025]') {
-                alert('Login successful!');
-                return true;
-            } else {
-                alert('Invalid username or password.');
-                return false;
-            }
-        }
+        const startDate = new Date('2025-09-07'); // Date to count days from
+        const currentDate = new Date();
+        const timeDifference = currentDate - startDate;
+        const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+        document.querySelector('.count').textContent = daysDifference;
     </script>
 </body>
 </html>
