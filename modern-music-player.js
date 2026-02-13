@@ -8,12 +8,12 @@
 
   // ============ PLAYLIST DATA ============
   const PLAYLIST = [
-    { id: 0, title: 'Song 1', src: 'Song1.mp3', cover: 'Image1.jpg' },
-    { id: 1, title: 'Song 2', src: 'Song2.mp3', cover: 'Image2.jpg' },
-    { id: 2, title: 'Song 3', src: 'Song3.mp3', cover: 'Image3.jpg' },
-    { id: 3, title: 'Song 4', src: 'Song4.mp3', cover: 'Image4.jpg' },
-    { id: 4, title: 'Song 5', src: 'Song5.mp3', cover: 'Image5.jpg' },
-    { id: 5, title: 'Song 6', src: 'Song6.mp3', cover: 'Image6.jpg' },
+    { id: 0, title: 'Nour einy', src: 'Song1.mp3', cover: 'Image1.jpg' },
+    { id: 1, title: 'Wala meen wala eh', src: 'Song2.mp3', cover: 'Image2.jpg' },
+    { id: 2, title: 'Narein', src: 'Song3.mp3', cover: 'Image3.jpg' },
+    { id: 3, title: 'Fe Eineh', src: 'Song4.mp3', cover: 'Image4.jpg' },
+    { id: 4, title: '100 Wahda', src: 'Song5.mp3', cover: 'Image5.jpg' },
+    { id: 5, title: 'Lel sobh m3ak', src: 'Song6.mp3', cover: 'Image6.jpg' },
   ];
 
   // ============ STATE MANAGEMENT ============
