@@ -72,272 +72,500 @@
         opacity: 1;
         transform: none;
       }
-    }  .main-heading {
-  font-family: "Amiri", serif;
-  background: linear-gradient(90deg, #e94057 38%, #f27121 80%, #fdaecb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: #e94057;
-  font-size: 2.6em;
-  text-align: center;
-  margin-bottom: 0px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  text-shadow: 0 2px 12px #fdaecb33;
-  line-height: 1.1;
-}
-.subtitle {
-  color: #b0578d;
-  font-size: 1.18em;
-  text-align: center;
-  margin-bottom: 28px;
-  font-family: cairo;
-  letter-spacing: 0.5px;
-}
+    }
+    .main-heading {
+      font-family: "Amiri", serif;
+      background: linear-gradient(90deg, #e94057 38%, #f27121 80%, #fdaecb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: #e94057;
+      font-size: 2.6em;
+      text-align: center;
+      margin-bottom: 0px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-shadow: 0 2px 12px #fdaecb33;
+      line-height: 1.1;
+    }
+    .subtitle {
+      color: #b0578d;
+      font-size: 1.18em;
+      text-align: center;
+      margin-bottom: 28px;
+      font-family: cairo;
+    }
+    .letter-heading {
+      font-size: 1.8em;
+      font-weight: 700;
+      text-align: center;
+      color: #e94057;
+      margin-bottom: 12px;
+      font-family: "Amiri", serif;
+      letter-spacing: 1px;
+    }
+    .love-letter {
+      background: linear-gradient(135deg, #ffe8f0 0%, #fff5fa 100%);
+      border-left: 5px solid #fd1d7c;
+      padding: 18px 16px;
+      border-radius: 12px;
+      font-size: 1.25em;
+      font-family: "Cairo", Arial, sans-serif;
+      text-align: right;
+      line-height: 2.3;
+      box-shadow: 0 2px 20px #fd7ca93a;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 2;
+      white-space: normal;
+      overflow-wrap: break-word;
+      max-width: 100%;
+      box-sizing: border-box;
+      border-radius: 20px;
+    }
+    .love-letter .typing {
+      display: inline-block;
+      border-right: 2px solid #fd1d7c;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink-caret 0.75s step-end infinite;
+      font-family: "Cairo", Arial, sans-serif;
+      font-weight: 600;
+    }
+    @keyframes blink-caret {
+      0%,
+      100% {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #fd1d7c;
+      }
+    }
+    .heart-emoji {
+      font-size: 1.4em;
+      animation: heartBeat 1s infinite;
+    }
+    @keyframes heartBeat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+    .gallery-section {
+      margin-top: 30px;
+    }
+    .gallery-heading {
+      font-size: 1.5em;
+      font-weight: 700;
+      text-align: center;
+      color: #e94057;
+      margin-bottom: 16px;
+      font-family: "Amiri", serif;
+    }
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .image-gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(253, 29, 124, 0.15);
+    }
+    .image-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 54px #fd1d7c90, 0 1px 34px #fff;
+      background: #fff;
+    }
+    .footer {
+      text-align: center;
+      color: #f50057;
+      margin-top: 30px;
+      font-size: 1em;
+      opacity: 0.96;
+      letter-spacing: 1.5px;
+      font-family: "Amiri", serif;
+      user-select: none;
+    }
 
-/* love letter */
-.letter-heading {
-  color: #fd1d7c;
-  font-family: "Amiri", serif;
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.18em;
-  margin-bottom: 7px;
-}
-.love-letter {
-  color: #a03367;
-  background: linear-gradient(110deg, #fff0f7 80%, #fdc7d0 100%);
-  border-radius: 20px;
-  border: 2.5px solid #fd1d7c14;
-  padding: 30px 20px; /* تكبير البادينج */
-  font-size: 1.25em; /* تكبير الخط */
-  font-family: "Cairo", Arial, sans-serif;
-  text-align: right;
-  line-height: 2.3;
-  box-shadow: 0 2px 20px #fd7ca93a;
-  margin-bottom: 22px;
-  position: relative;
-  z-index: 2;
-  white-space: normal; /* خلي الكلام يلتف */
-  overflow-wrap: break-word;
-  max-width: 100%;
-  box-sizing: border-box;
-  border-radius: 20px;
-}
-.love-letter .typing {
-  display: inline-block;
-  border-right: 2px solid #fd1d7c;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: blink-caret 0.75s step-end infinite;
-  font-family: "Cairo", Arial, sans-serif;
-  font-weight: 600;
-}
-@keyframes blink-caret {
-  0%,
-  100% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #fd1d7c;
-  }
-}
-.heart-emoji {
-  font-size: 1.4em;
-  margin: 0 4px;
-  vertical-align: middle;
-}
+    /* ========== MODERN MUSIC PLAYER STYLES ========== */
+    #mp-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px 16px;
+      background: linear-gradient(135deg, rgba(253, 29, 124, 0.05) 0%, rgba(253, 174, 203, 0.05) 100%);
+      border-radius: 24px;
+      margin: 20px auto;
+      max-width: 420px;
+      box-shadow: 0 4px 20px rgba(253, 29, 124, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(253, 29, 124, 0.1);
+    }
 
-/* Gallery */
-.gallery-section {
-  margin-top: 2px;
-  margin-bottom: 36px;
-}
-.gallery-heading {
-  text-align: center;
-  color: #e4015a;
-  font-family: "Amiri", serif;
-  font-size: 1.13em;
-  font-weight: 700;
-  margin-bottom: 9px;
-}
-.image-gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-.image-gallery img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 3px 19px #fd1d7c36;
-  border: 2.2px solid #fd1d7c1c;
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.18s;
-  background: #fff0f7;
-  margin-bottom: 1px;
-  cursor: pointer;
-}
-.image-gallery img:hover {
-  transform: scale(1.1) rotate(-3deg);
-  box-shadow: 0 5px 33px #fd1d7c88;
-  border-color: #fd1d7cc0;
-}
-/* Image preview overlay */
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(253, 29, 124, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.3s;
-}
-.lightbox-overlay img {
-  max-width: 97vw;
-  max-height: 85vh;
-  border-radius: 2vw;
-  box-shadow: 0 5px 54px #fd1d7c90, 0 1px 34px #fff;
-  background: #fff;
-}
+    .mp-cover-container {
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(253, 29, 124, 0.25);
+      border: 3px solid rgba(253, 29, 124, 0.2);
+      animation: mp-cover-pulse 2s ease-in-out infinite;
+    }
 
-.footer {
-  text-align: center;
-  color: #f50057;
-  margin-top: 30px;
-  font-size: 1em;
-  opacity: 0.96;
-  letter-spacing: 1.5px;
-  font-family: "Amiri", serif;
-  user-select: none;
-}
+    .mp-cover-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-/* Controls: made part of content inside .container (minimal change) */
-.controls-bottom {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 18px auto 8px auto;
-  z-index: 3000;
-  pointer-events: auto;
-}
+    @keyframes mp-cover-pulse {
+      0%, 100% {
+        box-shadow: 0 8px 30px rgba(253, 29, 124, 0.25);
+      }
+      50% {
+        box-shadow: 0 8px 40px rgba(253, 29, 124, 0.4);
+      }
+    }
 
-/* Shared small button style to replace fixed-position rules only */
-.control-btn {
-  background: linear-gradient(180deg, #ff5c8d, #ff2a6a);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: 700;
-  box-shadow: 0 6px 20px rgba(253, 29, 124, 0.25);
-  cursor: pointer;
-  font-family: "Cairo", sans-serif;
-  white-space: nowrap;
-}
+    .mp-song-info {
+      text-align: center;
+      width: 100%;
+    }
 
-/* keep the original audio-toggle visual but not fixed */
-.audio-toggle {
-  /* removed fixed positioning so it moves with page as part of content */
-  display: inline-block;
-  padding: 12px 18px;
-  min-width: 120px;
-}
+    .mp-song-title {
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #e94057;
+      margin: 0;
+      font-family: "Cairo", "Amiri", sans-serif;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
 
-/* prev/next as normal inline buttons (not fixed) */
-#prev-btn, #next-btn {
-  display: inline-block;
-  padding: 10px 14px;
-  min-width: 90px;
-}
+    .mp-progress-section {
+      width: 100%;
+      gap: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-/* Responsive */
-@media (max-width: 650px) {
-  .container {
-    max-width: 98vw;
-    padding: 15px 4vw 11px 4vw;
-  }
-  .main-heading {
-    font-size: 1.28em;
-  }
-  .love-letter {
-    font-size: 1.03em;
-    padding: 12px 2vw;
-  }
-  .image-gallery {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .image-gallery img {
-    aspect-ratio: 4 / 5;
-    min-height: 150px;
-    max-height: 230px;
-  }
-  .audio-toggle {
-    min-width: 100px;
-  }
-  #prev-btn {
-    padding: 8px 12px;
-    font-size: 0.85em;
-    min-width: 80px;
-  }
-  #next-btn {
-    padding: 8px 12px;
-    font-size: 0.85em;
-    min-width: 80px;
-  }
-}
+    .mp-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, rgba(253, 29, 124, 0.2), rgba(253, 174, 203, 0.2));
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      outline: none;
+      transition: height 0.2s ease;
+    }
 
-/* Hearts on click */
-.click-heart {
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  pointer-events: none;
-  user-select: none;
-  z-index: 4000;
-  animation: floatClickHeart 1s ease forwards;
-  filter: drop-shadow(0 0 5px #fd1d7c);
-}
-@keyframes floatClickHeart {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-80px) scale(1.6);
-  }
-}
+    .mp-progress-bar:hover,
+    .mp-progress-bar:focus {
+      height: 8px;
+    }
 
-/* Counter styles UPDATED */
-#time-count {
-  font-family: "Cairo", sans-serif;
-  font-size: 1.4em;
-  color: #e4015a;
-  text-align: center;
-  margin-bottom: 25px;
-  font-weight: 600;
-  background: linear-gradient(135deg, rgba(253, 29, 124, 0.08) 0%, rgba(253, 174, 203, 0.06) 100%);
-  padding: 20px 15px;
-  border-radius: 18px;
-  border: 2px solid rgba(253, 29, 124, 0.15);
-  letter-spacing: 1px;
-  line-height: 1.8;
-  box-shadow: 0 4px 15px rgba(253, 29, 124, 0.1);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
+    .mp-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff5c8d, #ff2a6a);
+      border-radius: 10px;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(255, 42, 106, 0.5);
+    }
 
-#time-count:hover {
-  background: linear-gradient(135deg, rgba(253, 29, 124, 0.12) 0%, rgba(253, 174, 203, 0.1) 100%);
-  box-shadow: 0 6px 20px rgba(253, 29, 124, 0.15);
-  transform: translateY(-2px);
-}
+    .mp-time-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      font-family: "Courier New", monospace;
+      color: #b0578d;
+      font-size: 0.95em;
+      font-weight: 500;
+    }
 
+    .mp-time {
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .mp-time-separator {
+      color: #d7266f;
+      opacity: 0.6;
+    }
+
+    .mp-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .mp-btn {
+      background: linear-gradient(180deg, #ff5c8d 0%, #ff2a6a 100%);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 42, 106, 0.3);
+      outline: none;
+    }
+
+    .mp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 42, 106, 0.4);
+    }
+
+    .mp-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(255, 42, 106, 0.3);
+    }
+
+    .mp-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .mp-btn-play {
+      width: 56px;
+      height: 56px;
+      font-size: 1.4em;
+      background: linear-gradient(180deg, #ff7ba9 0%, #ff4081 100%);
+      box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+    }
+
+    .mp-btn-play:hover {
+      box-shadow: 0 8px 28px rgba(255, 64, 129, 0.5);
+    }
+
+    .mp-btn-play.playing {
+      animation: mp-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes mp-pulse {
+      0%, 100% {
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
+      }
+      50% {
+        box-shadow: 0 6px 30px rgba(255, 64, 129, 0.7);
+      }
+    }
+
+    .mp-btn-loop.active {
+      background: linear-gradient(180deg, #ffb3d9 0%, #ff66a3 100%);
+      box-shadow: 0 4px 15px rgba(255, 102, 163, 0.5);
+    }
+
+    .mp-remaining-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95em;
+      color: #b0578d;
+      font-family: "Cairo", sans-serif;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .mp-remaining-label {
+      font-weight: 500;
+      color: #d7266f;
+    }
+
+    .mp-remaining-value {
+      font-family: "Courier New", monospace;
+      font-weight: 600;
+      color: #e94057;
+      min-width: 40px;
+    }
+
+    @media (max-width: 768px) {
+      #mp-container {
+        padding: 16px 12px;
+        gap: 12px;
+        margin: 16px auto;
+      }
+      .mp-cover-container {
+        width: 160px;
+        height: 160px;
+        border-radius: 16px;
+        border-width: 2px;
+      }
+      .mp-song-title {
+        font-size: 1.2em;
+      }
+      .mp-btn {
+        padding: 10px 14px;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1em;
+      }
+      .mp-btn-play {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3em;
+      }
+      .mp-controls {
+        gap: 10px;
+      }
+      .mp-time-display {
+        font-size: 0.9em;
+      }
+      .mp-remaining-time {
+        font-size: 0.9em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #mp-container {
+        padding: 14px 10px;
+        gap: 10px;
+        border-radius: 18px;
+      }
+      .mp-cover-container {
+        width: 140px;
+        height: 140px;
+        border-radius: 14px;
+      }
+      .mp-song-title {
+        font-size: 1.1em;
+      }
+      .mp-btn {
+        width: 40px;
+        height: 40px;
+        padding: 8px 12px;
+        font-size: 1em;
+      }
+      .mp-btn-play {
+        width: 46px;
+        height: 46px;
+        font-size: 1.2em;
+      }
+      .mp-controls {
+        gap: 8px;
+      }
+      .mp-time-display {
+        font-size: 0.85em;
+      }
+      .mp-time {
+        min-width: 35px;
+      }
+      .mp-remaining-time {
+        font-size: 0.85em;
+        flex-wrap: wrap;
+      }
+    }
+
+    .mp-btn:focus-visible {
+      outline: 2px solid #ff2a6a;
+      outline-offset: 2px;
+    }
+
+    .mp-progress-bar:focus-visible {
+      outline: 2px solid #ff2a6a;
+      outline-offset: 2px;
+    }
+
+    /* Old controls - keep for backward compatibility if needed */
+    .controls-bottom {
+      display: none;
+    }
+
+    .control-btn {
+      display: none;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        max-width: 98vw;
+        padding: 15px 4vw 11px 4vw;
+      }
+      .main-heading {
+        font-size: 1.28em;
+      }
+      .love-letter {
+        font-size: 1.03em;
+      }
+      .image-gallery {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .image-gallery img {
+        aspect-ratio: 4 / 5;
+        min-height: 150px;
+        max-height: 230px;
+      }
+    }
+
+    .click-heart {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      pointer-events: none;
+      user-select: none;
+      z-index: 4000;
+      animation: floatClickHeart 1s ease forwards;
+      filter: drop-shadow(0 0 5px #fd1d7c);
+    }
+
+    @keyframes floatClickHeart {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5);
+      }
+    }
+
+    #time-count {
+      text-align: center;
+      font-size: 1.1em;
+      color: #fd1d7c;
+      font-weight: 600;
+      margin-bottom: 18px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, rgba(253, 29, 124, 0.08) 0%, rgba(253, 174, 203, 0.08) 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(253, 29, 124, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    #time-count:hover {
+      background: linear-gradient(135deg, rgba(253, 29, 124, 0.12) 0%, rgba(253, 174, 203, 0.1) 100%);
+      box-shadow: 0 6px 20px rgba(253, 29, 124, 0.15);
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body>
@@ -350,51 +578,128 @@
   <div class="container">
     <!-- العداد فوق -->
     <div id="time-count">بقالي ... مستحمل حلاوتك وبحبك</div>
+
     <h1 class="main-heading">
-  شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله
-</h1>
-<p class="subtitle">
-  اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه
-  كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي
-</p>
+      شويه رومانسيه متعوب عليها بقي قاعد اكتر من ساعتين فيها والله
+    </h1>
+    <p class="subtitle">
+      اتمني تكوني اتبسطتي باليوم معايا و انه يكون لذيذ عليكي و دي حاجه بسيطه
+      كدا زياده عشان لما تروحي البيت تتبسطي اكتر يروحي
+    </p>
 
-<section>
-  <div class="letter-heading">14/2:</div>
-  <div class="love-letter" id="letter">
-    <span class="typing"></span>
-    <br />
-    <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول
-    بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق
-    بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي
-    احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
-    <span class="heart-emoji">💗💖💗</span>
-  </div>
-</section>
+    <section>
+      <div class="letter-heading">14/2:</div>
+      <div class="love-letter" id="letter">
+        <span class="typing"></span>
+        <br />
+        <span class="heart-emoji">💗</span> عارف اني بزعلك كتير اوي مني و علاطول
+        بتعصب عليكي و بزعقلك بس انتي بجد اغلي حاجه عندي و لما بتعصب او بزعق
+        بيبقي عشان بحبك و خايف عليكي و مش عايزك لحد تاني غيري و بجد يعني انتي
+        احلي حاجه حصلتلي في حياتي كلها و ربنا يخليكي ليا يارب
+        <span class="heart-emoji">💗💖💗</span>
+      </div>
+    </section>
 
-<section class="gallery-section">
-  <div class="gallery-heading"> الدمج بتاعي</div>
-  <div class="image-gallery" id="gallery">
-    <img src="Image1.jpg" alt="زنجيه" />
-    <img src="Image2.jpg" alt="زنجيه" />
-    <img src="Image3.jpg" alt="زنجيه" />
-    <img src="Image4.jpg" alt="زنجيه" />
-    <img src="Image5.jpg" alt="زنجيه" />
-    <img src="Image6.jpg" alt="زنجيه" />
-    <img src="Image7.jpg" alt="زنجيه" />
-    <img src="Image8.jpg" alt="زنجيه" />
-    <img src="Image9.jpg" alt="زنجيه" />
-    <img src="Image10.jpg" alt="زنجيه" />
-  </div>
-</section>
+    <section class="gallery-section">
+      <div class="gallery-heading"> الدمج بتاعي</div>
+      <div class="image-gallery" id="gallery">
+        <img src="Image1.jpg" alt="زنجيه" />
+        <img src="Image2.jpg" alt="زنجيه" />
+        <img src="Image3.jpg" alt="زنجيه" />
+        <img src="Image4.jpg" alt="زنجيه" />
+        <img src="Image5.jpg" alt="زنجيه" />
+        <img src="Image6.jpg" alt="زنجيه" />
+        <img src="Image7.jpg" alt="زنجيه" />
+        <img src="Image8.jpg" alt="زنجيه" />
+        <img src="Image9.jpg" alt="زنجيه" />
+        <img src="Image10.jpg" alt="زنجيه" />
+      </div>
+    </section>
 
-<!-- Controls moved inside .container so they are always part of the content and move with the page -->
-<div class="controls-bottom" id="controls-bottom" role="region" aria-label="عناصر التحكم">
-  <button id="prev-btn" class="control-btn">السابق</button>
-  <button id="audio-btn" class="audio-toggle control-btn" aria-pressed="false" title="تشغيل/إيقاف الموسيقى">دوسي هنا</button>
-  <button id="next-btn" class="control-btn">التالي</button>
-</div>
+    <!-- Modern Music Player Container -->
+    <div id="mp-container" class="mp-player-wrapper">
+      <!-- Album Cover -->
+      <div class="mp-cover-container">
+        <img 
+          id="mp-cover" 
+          src="Image1.jpg" 
+          alt="Album Cover" 
+          class="mp-cover-image"
+        />
+      </div>
 
-<div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
+      <!-- Song Title -->
+      <div class="mp-song-info">
+        <h3 id="mp-current-song" class="mp-song-title">Song 1</h3>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="mp-progress-section">
+        <div 
+          id="mp-progress-container" 
+          class="mp-progress-bar" 
+          role="progressbar" 
+          aria-label="Song Progress"
+          tabindex="0"
+        >
+          <div id="mp-progress-fill" class="mp-progress-fill"></div>
+        </div>
+        
+        <!-- Time Display -->
+        <div class="mp-time-display">
+          <span id="mp-current-time" class="mp-time">00:00</span>
+          <span class="mp-time-separator">/</span>
+          <span id="mp-total-time" class="mp-time">00:00</span>
+        </div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="mp-controls">
+        <button 
+          id="mp-prev-btn" 
+          class="mp-btn mp-btn-prev" 
+          aria-label="Previous Song"
+          title="Previous"
+        >
+          ⏮
+        </button>
+        
+        <button 
+          id="mp-play-btn" 
+          class="mp-btn mp-btn-play" 
+          aria-label="Play/Pause"
+          title="Play"
+        >
+          ▶
+        </button>
+        
+        <button 
+          id="mp-next-btn" 
+          class="mp-btn mp-btn-next" 
+          aria-label="Next Song"
+          title="Next"
+        >
+          ⏭
+        </button>
+        
+        <button 
+          id="mp-loop-btn" 
+          class="mp-btn mp-btn-loop" 
+          aria-label="Toggle Loop"
+          title="Loop Off"
+        >
+          🔁
+        </button>
+      </div>
+
+      <!-- Remaining Time Display -->
+      <div class="mp-remaining-time">
+        <span class="mp-remaining-label">Remaining:</span>
+        <span id="mp-remaining-time" class="mp-remaining-value">00:00</span>
+      </div>
+    </div>
+
+    <div class="footer">معمول مخصوص ل احلي زنجيه و نونو في حياتي </div>
 
   </div>
 
@@ -411,25 +716,32 @@
     function makeHeart() {
       const d = document.createElement("img");
       d.src = heartImgs[Math.floor(Math.random() * heartImgs.length)];
+      d.style.left = randomBetween(0, window.innerWidth) + "px";
+      d.style.top = window.innerHeight + "px";
+      d.style.opacity = 0.19;
+      d.style.position = "fixed";
+      d.style.pointerEvents = "none";
+      d.style.width = "40px";
+      d.style.height = "40px";
+      d.style.animation = "floatHearts 12s linear forwards";
       d.className = "heart";
-      d.style.left = randomBetween(-4, 96) + "vw";
-      d.style.width = d.style.height = randomBetween(30, 55) + "px";
-      d.style.animationDelay = randomBetween(0, 5) + "s";
-      d.style.animationDuration = randomBetween(9, 16) + "s";
-      d.style.opacity = randomBetween(0.16, 0.23);
       document.querySelector(".hearts-bg").appendChild(d);
       setTimeout(() => {
         d.remove();
-      }, 16000);
+      }, 12000);
     }
-    setInterval(makeHeart, 700);
-    for (let i = 0; i < 9; i++) setTimeout(makeHeart, i * 500);
+    setInterval(makeHeart, 300);
 
-    // Simple lightbox: click image to enlarge and close on click anywhere
+    // Image gallery click effect
     document.querySelectorAll(".image-gallery img").forEach((img) => {
-      img.onclick = function () {
+      img.onclick = () => {
         const o = document.createElement("div");
-        o.className = "lightbox-overlay";
+        o.style.position = "fixed";
+        o.style.top = "50%";
+        o.style.left = "50%";
+        o.style.transform = "translate(-50%, -50%)";
+        o.style.zIndex = 5000;
+        o.style.cursor = "pointer";
         o.onclick = () => o.remove();
         const im = document.createElement("img");
         im.src = img.src;
@@ -439,136 +751,36 @@
       };
     });
 
-    // Audio player with 3 songs and controls
-    const audio = document.getElementById("bg-audio");
-    const audioBtn = document.getElementById("audio-btn");
-    const songs = ["Song1.mp3", "Song2.mp3", "Song3.mp3", "Song4.mp3", "Song5.mp3", "Song6.mp3"];
-    let currentSong = 0;
+    // ============ MODERN MUSIC PLAYER ============
+    (function () {
+      'use strict';
 
-    function loadSong(index) {
-      audio.src = songs[index];
-      audio.load();
-      audio.play();
-      updateButton();
-    }
-    function updateButton() {
-      if (audio.paused) {
-        audioBtn.textContent = "دوسي هنا";
-        audioBtn.setAttribute("aria-pressed", "false");
-      } else {
-        audioBtn.textContent = "إيقاف الموسيقى";
-        audioBtn.setAttribute("aria-pressed", "true");
+      // ============ PLAYLIST DATA ============
+      const PLAYLIST = [
+        { id: 0, title: 'Song 1', src: 'Song1.mp3', cover: 'Image1.jpg' },
+        { id: 1, title: 'Song 2', src: 'Song2.mp3', cover: 'Image2.jpg' },
+        { id: 2, title: 'Song 3', src: 'Song3.mp3', cover: 'Image3.jpg' },
+        { id: 3, title: 'Song 4', src: 'Song4.mp3', cover: 'Image4.jpg' },
+        { id: 4, title: 'Song 5', src: 'Song5.mp3', cover: 'Image5.jpg' },
+        { id: 5, title: 'Song 6', src: 'Song6.mp3', cover: 'Image6.jpg' },
+      ];
+
+      // ============ STATE MANAGEMENT ============
+      const player = {
+        audio: null,
+        currentIndex: 0,
+        isLooping: false,
+        isAutoPlay: true,
+      };
+
+      // ============ UTILITY FUNCTIONS ============
+      function formatTime(seconds) {
+        if (!seconds || isNaN(seconds)) return '00:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
       }
-    }
-    audioBtn.addEventListener("click", () => {
-      if (audio.paused) {
-        if (!audio.src) {
-          loadSong(currentSong);
-        } else {
-          audio.play();
-          updateButton();
-        }
-      } else {
-        audio.pause();
-        updateButton();
-      }
-    });
-    // Next song on audio end
-    audio.addEventListener("ended", () => {
-      currentSong = (currentSong + 1) % songs.length;
-      loadSong(currentSong);
-    });
 
-    // Prev and Next buttons
-    document.getElementById("prev-btn").addEventListener("click", () => {
-      currentSong = (currentSong - 1 + songs.length) % songs.length;
-      loadSong(currentSong);
-    });
-
-    document.getElementById("next-btn").addEventListener("click", () => {
-      currentSong = (currentSong + 1) % songs.length;
-      loadSong(currentSong);
-    });
-
-    // Time counter MONTHS / DAYS / HOURS / MINUTES
-const startDate = new Date(2025, 8, 7, 0, 0, 0);
-const timeCount = document.getElementById("time-count");
-
-function updateTimeCount() {
-  const now = new Date();
-
-  let months =
-    (now.getFullYear() - startDate.getFullYear()) * 12 +
-    (now.getMonth() - startDate.getMonth());
-
-  let tempDate = new Date(startDate);
-  tempDate.setMonth(startDate.getMonth() + months);
-
-  if (tempDate > now) {
-    months--;
-    tempDate.setMonth(startDate.getMonth() + months);
-  }
-
-  let diff = Math.floor((now - tempDate) / 1000);
-
-  const days = Math.floor(diff / 86400);
-  diff %= 86400;
-
-  const hours = Math.floor(diff / 3600);
-  diff %= 3600;
-
-  const minutes = Math.floor(diff / 60);
-
-  const formatNumber = (num) => String(num).padStart(2, "0");
-
-  timeCount.textContent =
-    `⏰ بقالي ${months} شهور و${days} ايام و${formatNumber(hours)} ساعة و${formatNumber(minutes)} دقيقة مستحمل حلاوتك وبحبك 💗`;
-}
-
-setInterval(updateTimeCount, 60000);
-updateTimeCount();
-
-    // Typewriter effect for love letter full text
-    const typingText =
-      "عامله ايه يا نونو، 💗 ";
-    const typingElem = document.querySelector(".typing");
-    let charIndex = 0;
-
-    function typeWriter() {
-      if (charIndex < typingText.length) {
-        typingElem.textContent += typingText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 70);
-      }
-    }
-    typeWriter();
-
-    // Hearts on click effect (original behavior: create heart on every click)
-    document.body.addEventListener("click", function (e) {
-      const heart = document.createElement("div");
-      heart.className = "click-heart";
-      heart.style.left = e.clientX - 15 + "px";
-      heart.style.top = e.clientY - 15 + "px";
-      heart.innerHTML = "💗";
-      document.body.appendChild(heart);
-      setTimeout(() => {
-        heart.remove();
-      }, 1000);
-    });
-
-    // Try to autoplay audio (hide button if success)
-    function tryPlayAudio() {
-      audio.volume = 0.9;
-      audio.play()
-        .then(() => {
-          audioBtn.style.display = "none";
-        })
-        .catch(() => {
-          audioBtn.style.display = "block";
-          updateButton();
-        });
-    }
-    tryPlayAudio();
-  </script>
-</body>
-</html>
+      function loadSong(index) {
+        if (index < 0 || index >= PLAYLIST.length) return;
+        player.currentIndex = 
