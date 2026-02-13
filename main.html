@@ -783,4 +783,296 @@
 
       function loadSong(index) {
         if (index < 0 || index >= PLAYLIST.length) return;
-        player.currentIndex = 
+      player.currentIndex = index;
+      const song = PLAYLIST[index];
+      
+      if (player.audio) {
+        player.audio.src = song.src;
+        player.audio.load();
+      }
+      updatePlayerUI();
+    }
+
+    function playSong() {
+      if (!player.audio) return;
+      if (!player.audio.src) {
+        loadSong(player.currentIndex);
+      }
+      player.audio.play().catch(() => {
+        console.log('Auto-play prevented by browser');
+      });
+      updatePlayerUI();
+    }
+
+    function pauseSong() {
+      if (player.audio) {
+        player.audio.pause();
+      }
+      updatePlayerUI();
+    }
+
+    function togglePlayPause() {
+      if (!player.audio.src) {
+        loadSong(player.currentIndex);
+        playSong();
+      } else if (player.audio.paused) {
+        playSong();
+      } else {
+        pauseSong();
+      }
+    }
+
+    function nextSong() {
+      const nextIndex = (player.currentIndex + 1) % PLAYLIST.length;
+      loadSong(nextIndex);
+      playSong();
+    }
+
+    function previousSong() {
+      const prevIndex = (player.currentIndex - 1 + PLAYLIST.length) % PLAYLIST.length;
+      loadSong(prevIndex);
+      playSong();
+    }
+
+    function toggleLoop() {
+      player.isLooping = !player.isLooping;
+      if (player.audio) {
+        player.audio.loop = player.isLooping;
+      }
+      updateLoopButton();
+    }
+
+    function seekTo(percentage) {
+      if (!player.audio || !player.audio.duration) return;
+      const time = (percentage / 100) * player.audio.duration;
+      player.audio.currentTime = time;
+    }
+
+    // ============ UI UPDATE FUNCTIONS ============
+    function updatePlayerUI() {
+      updatePlayButton();
+      updateSongInfo();
+      updateProgressBar();
+      updateTimeDisplay();
+    }
+
+    function updatePlayButton() {
+      const playBtn = document.getElementById('mp-play-btn');
+      if (!playBtn) return;
+      const isPlaying = player.audio && !player.audio.paused;
+      playBtn.innerHTML = isPlaying ? '⏸' : '▶';
+      playBtn.setAttribute('title', isPlaying ? 'Pause' : 'Play');
+      playBtn.classList.toggle('playing', isPlaying);
+    }
+
+    function updateSongInfo() {
+      const titleElem = document.getElementById('mp-current-song');
+      const coverElem = document.getElementById('mp-cover');
+      
+      if (titleElem) {
+        titleElem.textContent = PLAYLIST[player.currentIndex].title;
+      }
+      if (coverElem) {
+        coverElem.src = PLAYLIST[player.currentIndex].cover;
+        coverElem.alt = PLAYLIST[player.currentIndex].title;
+      }
+    }
+
+    function updateProgressBar() {
+      const progressBar = document.getElementById('mp-progress-fill');
+      if (!progressBar || !player.audio) return;
+      const percent = player.audio.duration 
+        ? (player.audio.currentTime / player.audio.duration) * 100 
+        : 0;
+      progressBar.style.width = percent + '%';
+    }
+
+    function updateTimeDisplay() {
+      const currentTimeElem = document.getElementById('mp-current-time');
+      const totalTimeElem = document.getElementById('mp-total-time');
+      const remainingTimeElem = document.getElementById('mp-remaining-time');
+
+      if (!player.audio) return;
+
+      const current = formatTime(player.audio.currentTime);
+      const total = formatTime(player.audio.duration);
+      const remaining = formatTime(
+        Math.max(0, player.audio.duration - player.audio.currentTime)
+      );
+
+      if (currentTimeElem) currentTimeElem.textContent = current;
+      if (totalTimeElem) totalTimeElem.textContent = total;
+      if (remainingTimeElem) remainingTimeElem.textContent = remaining;
+    }
+
+    function updateLoopButton() {
+      const loopBtn = document.getElementById('mp-loop-btn');
+      if (loopBtn) {
+        loopBtn.classList.toggle('active', player.isLooping);
+      }
+    }
+
+    // ============ EVENT LISTENERS SETUP ============
+    function setupEventListeners() {
+      const playBtn = document.getElementById('mp-play-btn');
+      if (playBtn) {
+        playBtn.addEventListener('click', togglePlayPause);
+      }
+
+      const nextBtn = document.getElementById('mp-next-btn');
+      const prevBtn = document.getElementById('mp-prev-btn');
+      if (nextBtn) nextBtn.addEventListener('click', nextSong);
+      if (prevBtn) prevBtn.addEventListener('click', previousSong);
+
+      const loopBtn = document.getElementById('mp-loop-btn');
+      if (loopBtn) {
+        loopBtn.addEventListener('click', toggleLoop);
+      }
+
+      const progressContainer = document.getElementById('mp-progress-container');
+      if (progressContainer) {
+        progressContainer.addEventListener('click', (e) => {
+          const rect = progressContainer.getBoundingClientRect();
+          const percent = ((e.clientX - rect.left) / rect.width) * 100;
+          seekTo(Math.max(0, Math.min(100, percent)));
+        });
+      }
+
+      if (player.audio) {
+        player.audio.addEventListener('timeupdate', () => {
+          updateProgressBar();
+          updateTimeDisplay();
+        });
+
+        player.audio.addEventListener('loadedmetadata', () => {
+          updateTimeDisplay();
+        });
+
+        player.audio.addEventListener('ended', () => {
+          if (player.isAutoPlay && !player.isLooping) {
+            nextSong();
+          }
+        });
+
+        player.audio.addEventListener('play', updatePlayButton);
+        player.audio.addEventListener('pause', updatePlayButton);
+      }
+    }
+
+    // ============ INITIALIZATION ============
+    function init() {
+      player.audio = document.getElementById('bg-audio');
+      
+      if (!player.audio) {
+        console.warn('Modern Music Player: bg-audio element not found');
+        return;
+      }
+
+      player.audio.loop = player.isLooping;
+      setupEventListeners();
+      updatePlayerUI();
+    }
+
+    // ============ EXPORT PUBLIC API ============
+    window.ModernMusicPlayer = {
+      play: playSong,
+      pause: pauseSong,
+      togglePlayPause,
+      next: nextSong,
+      prev: previousSong,
+      toggleLoop,
+      seekTo,
+      getPlaylist: () => PLAYLIST,
+      getCurrentIndex: () => player.currentIndex,
+      getCurrentSong: () => PLAYLIST[player.currentIndex],
+      isPlaying: () => player.audio && !player.audio.paused,
+    };
+
+    // Auto-initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    })();
+
+    // Time counter MONTHS / DAYS / HOURS / MINUTES
+    const startDate = new Date(2025, 8, 7, 0, 0, 0);
+    const timeCount = document.getElementById("time-count");
+
+    function updateTimeCount() {
+      const now = new Date();
+
+      let months =
+        (now.getFullYear() - startDate.getFullYear()) * 12 +
+        (now.getMonth() - startDate.getMonth());
+
+      let tempDate = new Date(startDate);
+      tempDate.setMonth(startDate.getMonth() + months);
+
+      if (tempDate > now) {
+        months--;
+        tempDate.setMonth(startDate.getMonth() + months);
+      }
+
+      let diff = Math.floor((now - tempDate) / 1000);
+
+      const days = Math.floor(diff / 86400);
+      diff %= 86400;
+
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+
+      const minutes = Math.floor(diff / 60);
+
+      const formatNumber = (num) => String(num).padStart(2, "0");
+
+      timeCount.textContent =
+        `⏰ بقالي ${months} شهور و${days} ايام و${formatNumber(hours)} ساعة و${formatNumber(minutes)} دقيقة مستحمل حلاوتك وبحبك 💗`;
+    }
+
+    setInterval(updateTimeCount, 60000);
+    updateTimeCount();
+
+    // Typewriter effect for love letter full text
+    const typingText =
+      "عامله ايه يا نونو، 💗 ";
+    const typingElem = document.querySelector(".typing");
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < typingText.length) {
+        typingElem.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 70);
+      }
+    }
+    typeWriter();
+
+    // Hearts on click effect
+    document.body.addEventListener("click", function (e) {
+      const heart = document.createElement("div");
+      heart.className = "click-heart";
+      heart.style.left = e.clientX - 15 + "px";
+      heart.style.top = e.clientY - 15 + "px";
+      heart.innerHTML = "💗";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    });
+
+    // Try to autoplay audio
+    function tryPlayAudio() {
+      const audio = document.getElementById("bg-audio");
+      if (audio) {
+        audio.volume = 0.9;
+        audio.play().catch(() => {
+          console.log('Autoplay prevented by browser');
+        });
+      }
+    }
+    tryPlayAudio();
+  </script>
+</body>
+</html>
